@@ -3,6 +3,8 @@ project:
 
 website:
   title: "fnands"
+  site-url: https://fnands.pages.dev
+  description: "My personal blog"
   navbar:
     right:
       - about.qmd
