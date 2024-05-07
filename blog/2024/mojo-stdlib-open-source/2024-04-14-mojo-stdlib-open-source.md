@@ -25,7 +25,7 @@ A slight difference is that for Mojo dicts the types must be statically specifie
 So to define a dictionary: 
 
 
-```python
+```mojo
 from collections import Dict
 var my_dict = Dict[String, String]()
 my_dict["foo"] = "oof"
@@ -47,7 +47,7 @@ So pretty straightforward stuff. Nice!
 Another profiling feature that I've never seen anywhere before is getting not just the number of cores on your system, but the types as well. 
 
 
-```python
+```mojo
 from sys import info
 
 print(info.num_logical_cores())
@@ -73,7 +73,7 @@ Talking of comparing Mojo to Rust, [ThePrimeagen](https://twitter.com/ThePrimeag
 Another release, another useful data structure. This time it's Mojo's implementation of a set: 
 
 
-```python
+```mojo
 from collections import Set
 
 var my_set = Set[String]()
@@ -100,7 +100,7 @@ The `a in b` syntax from Python is also new, so every day we get a bit closer to
 A feature I haven't appreciated before is unbound values and the `alias` declaration: so you can create an alias of an object, which is basically a partial initialization that can then be fully initialized later. 
 
 
-```python
+```mojo
 @value
 struct StructWithDefault[a: Int, b: Int, c: Int = 8, d: Int = 9]: pass
 alias end_unbound = StructWithDefault[3, 4, 5, _]
@@ -114,7 +114,7 @@ This reminds me a bit of `partial` in Python (however, this does happen at compi
 A new feature is that you can unbind any number of parameters with `*_`
 
 
-```python
+```mojo
 alias most_unbound = StructWithDefault[3, *_]
 
 var my_instance_567 = most_unbound[5, 6, 7]()
@@ -126,7 +126,7 @@ An issue I ran into earlier was the lack of support for iteration in `DynamicVec
 Additionally (in v24.2), the `DynamicVector` been replaced with a `List`, which has a distinctly Pythonic feel to it: 
 
 
-```python
+```mojo
 var names =  List[String]("Alice", "Bob", "Charlie")
 for x in names:
     x[] = str("Hello, ") + x[]
@@ -144,7 +144,7 @@ Even negative indexing is now supported:
 
 
 
-```python
+```mojo
 print(names[-1])
 ```
 
@@ -168,7 +168,7 @@ i.e. only the `Pointer` (or `Reference`) is immutable if you use `let`, not the 
 `print` in Mojo is now very close to the Python version, so you can specify the separator and end:  
 
 
-```python
+```mojo
 print("Hello", "Mojo", sep=", ", end="!!!\n") 
 print("Hello", "Mojo", sep="~~~", end="\n~~~") 
 ```
