@@ -1,0 +1,21 @@
+---
+title: "About"
+image: https://avatars.githubusercontent.com/u/3948531?v=4
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/f_nan_d
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/ferdinand-schenck-3027677a/
+    - icon: github
+      text: Github
+      href: https://github.com/fnands
+
+---
+
+This is my personal blog. I write about whatever interesting I might run into. 
+
+I'm a machine learning engineer with a background in physics, currently working at LiveEO. 

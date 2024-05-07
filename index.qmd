@@ -1,0 +1,15 @@
+---
+title: "fnands_quarto"
+listing:
+  contents: [posts, blog]
+  sort: "date desc"
+  type: table
+  categories: true
+  sort-ui: false
+  filter-ui: false
+  feed: true
+page-layout: full
+title-block-banner: true
+---
+
+

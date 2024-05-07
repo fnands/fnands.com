@@ -1,0 +1,29 @@
+project:
+  type: website
+
+website:
+  title: "fnands"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/fnands
+      - icon: twitter
+        href: https://twitter.com/f_nan_d
+      - icon: rss
+        href: index.xml
+format:
+  html:
+    reference-location: document
+    theme: 
+      dark: [solar, custom.scss]
+      light: [flatly, custom-light.scss]
+    css:
+      - styles.css
+    toc: true
+    syntax-definitions: 
+      - syntax/mojo_syntax.xml
+      - syntax/julia.xml
+
+
+
