@@ -1,5 +1,5 @@
 ---
-title: "fnands_quarto"
+title: "blog"
 listing:
   contents: [posts, blog]
   sort: "date desc"
