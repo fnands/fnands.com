@@ -4,6 +4,7 @@ listing:
   contents: [posts, blog]
   sort: "date desc"
   type: table
+  fields: [date, title]
   categories: true
   sort-ui: false
   filter-ui: false
