@@ -3,7 +3,7 @@ project:
 
 website:
   title: "fnands"
-  site-url: https://fnands.pages.dev
+  site-url: https://fnands.com
   description: "My personal blog"
   navbar:
     right:
