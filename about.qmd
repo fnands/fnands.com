@@ -1,6 +1,6 @@
 ---
 title: "About"
-image: https://avatars.githubusercontent.com/u/3948531?v=4
+image: assets/f_logo.webp
 about:
   template: jolla
   links:
