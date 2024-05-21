@@ -5,7 +5,7 @@ website:
   title: "fnands"
   site-url: https://fnands.com
   description: "My personal blog"
-  favicon: "f_icon.webp"
+  favicon: "f_icon.png"
   navbar:
     right:
       - about.qmd
