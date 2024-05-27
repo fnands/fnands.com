@@ -137,6 +137,290 @@ fn CRC32_table_16_byte(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt3
 
     return crc32^0xffffffff
 
+
+fn CRC32_table_32_byte(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32]) -> SIMD[DType.uint32, 1]:
+    var crc32: UInt32 = 0xffffffff
+
+    var size = 32
+
+    var length = len(data)//size
+    var extra = len(data) % size
+
+
+
+    for i in range(start = 0, end = length*size, step = size):
+        
+        var val_1: UInt32 = (data[i + 3].cast[DType.uint32]() << 24) | 
+                            (data[i + 2].cast[DType.uint32]() << 16) | 
+                            (data[i + 1].cast[DType.uint32]() << 8) | 
+                             data[i + 0].cast[DType.uint32]()
+
+        var val_2: UInt32 = (data[i + 7].cast[DType.uint32]() << 24) | 
+                            (data[i + 6].cast[DType.uint32]() << 16) | 
+                            (data[i + 5].cast[DType.uint32]() << 8) | 
+                             data[i + 4].cast[DType.uint32]()
+
+        var val_3: UInt32 = (data[i + 11].cast[DType.uint32]() << 24) | 
+                            (data[i + 10].cast[DType.uint32]() << 16) | 
+                            (data[i + 9].cast[DType.uint32]() << 8) | 
+                             data[i + 8].cast[DType.uint32]()
+
+        var val_4: UInt32 = (data[i + 15].cast[DType.uint32]() << 24) | 
+                            (data[i + 14].cast[DType.uint32]() << 16) | 
+                            (data[i + 13].cast[DType.uint32]() << 8) | 
+                             data[i + 12].cast[DType.uint32]()
+
+        var val_5: UInt32 = (data[i + 19].cast[DType.uint32]() << 24) | 
+                            (data[i + 18].cast[DType.uint32]() << 16) | 
+                            (data[i + 17].cast[DType.uint32]() << 8) | 
+                             data[i + 16].cast[DType.uint32]()
+
+        var val_6: UInt32 = (data[i + 23].cast[DType.uint32]() << 24) | 
+                            (data[i + 22].cast[DType.uint32]() << 16) | 
+                            (data[i + 21].cast[DType.uint32]() << 8) | 
+                             data[i + 20].cast[DType.uint32]()
+
+        var val_7: UInt32 = (data[i + 27].cast[DType.uint32]() << 24) | 
+                            (data[i + 26].cast[DType.uint32]() << 16) | 
+                            (data[i + 25].cast[DType.uint32]() << 8) | 
+                             data[i + 24].cast[DType.uint32]()
+
+        var val_8: UInt32 = (data[i + 31].cast[DType.uint32]() << 24) | 
+                            (data[i + 30].cast[DType.uint32]() << 16) | 
+                            (data[i + 29].cast[DType.uint32]() << 8) | 
+                             data[i + 28].cast[DType.uint32]()
+
+        var index_1 = crc32 ^ val_1.cast[DType.uint32]()
+        var index_2 = val_2.cast[DType.uint32]()
+        var index_3 = val_3.cast[DType.uint32]()
+        var index_4 = val_4.cast[DType.uint32]()
+        var index_5 = val_5.cast[DType.uint32]()
+        var index_6 = val_6.cast[DType.uint32]()
+        var index_7 = val_7.cast[DType.uint32]()
+        var index_8 = val_8.cast[DType.uint32]()
+
+        crc32 = table[0*256 + int((index_8 >> 24).cast[DType.uint8]())] ^
+                table[1*256 + int((index_8 >> 16).cast[DType.uint8]())] ^
+                table[2*256 + int((index_8 >> 8).cast[DType.uint8]())] ^
+                table[3*256 + int((index_8 >> 0).cast[DType.uint8]())] ^
+                table[4*256 + int((index_7 >> 24).cast[DType.uint8]())] ^
+                table[5*256 + int((index_7 >> 16).cast[DType.uint8]())] ^
+                table[6*256 + int((index_7 >> 8).cast[DType.uint8]())] ^
+                table[7*256 + int((index_7 >> 0).cast[DType.uint8]())] ^
+                table[8*256 + int((index_6 >> 24).cast[DType.uint8]())] ^
+                table[9*256 + int((index_6 >> 16).cast[DType.uint8]())] ^
+                table[10*256 + int((index_6 >> 8).cast[DType.uint8]())] ^
+                table[11*256 + int((index_6 >> 0).cast[DType.uint8]())] ^
+                table[12*256 + int((index_5 >> 24).cast[DType.uint8]())] ^
+                table[13*256 + int((index_5 >> 16).cast[DType.uint8]())] ^
+                table[14*256 + int((index_5 >> 8).cast[DType.uint8]())] ^
+                table[15*256 + int((index_5 >> 0).cast[DType.uint8]())] ^
+                table[16*256 + int((index_4 >> 24).cast[DType.uint8]())] ^
+                table[17*256 + int((index_4 >> 16).cast[DType.uint8]())] ^
+                table[18*256 + int((index_4 >> 8).cast[DType.uint8]())] ^
+                table[19*256 + int((index_4 >> 0).cast[DType.uint8]())] ^
+                table[20*256 + int((index_3 >> 24).cast[DType.uint8]())] ^
+                table[21*256 + int((index_3 >> 16).cast[DType.uint8]())] ^
+                table[22*256 + int((index_3 >> 8).cast[DType.uint8]())] ^
+                table[23*256 + int((index_3 >> 0).cast[DType.uint8]())] ^
+                table[24*256 + int((index_2 >> 24).cast[DType.uint8]())] ^
+                table[25*256 + int((index_2 >> 16).cast[DType.uint8]())] ^
+                table[26*256 + int((index_2 >> 8).cast[DType.uint8]())] ^
+                table[27*256 + int((index_2 >> 0).cast[DType.uint8]())] ^
+                table[28*256 + int((index_1 >> 24).cast[DType.uint8]())] ^
+                table[29*256 + int((index_1 >> 16).cast[DType.uint8]())] ^
+                table[30*256 + int((index_1 >> 8).cast[DType.uint8]())] ^
+                table[31*256 + int((index_1 >> 0).cast[DType.uint8]())] 
+    
+    for i in range(size*length, size*length + extra ):
+        var index = (crc32 ^ data[i].cast[DType.uint32]()) & 0xff
+        crc32 = table[int(index)] ^ (crc32 >> 8)
+
+
+    return crc32^0xffffffff
+
+fn CRC32_table_64_byte(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32]) -> SIMD[DType.uint32, 1]:
+    var crc32: UInt32 = 0xffffffff
+
+    var size = 64
+
+    var length = len(data)//size
+    var extra = len(data) % size
+
+
+
+    for i in range(start = 0, end = length*size, step = size):
+        
+        var val_1: UInt32 = (data[i + 3].cast[DType.uint32]() << 24) | 
+                            (data[i + 2].cast[DType.uint32]() << 16) | 
+                            (data[i + 1].cast[DType.uint32]() << 8) | 
+                             data[i + 0].cast[DType.uint32]()
+
+        var val_2: UInt32 = (data[i + 7].cast[DType.uint32]() << 24) | 
+                            (data[i + 6].cast[DType.uint32]() << 16) | 
+                            (data[i + 5].cast[DType.uint32]() << 8) | 
+                             data[i + 4].cast[DType.uint32]()
+
+        var val_3: UInt32 = (data[i + 11].cast[DType.uint32]() << 24) | 
+                            (data[i + 10].cast[DType.uint32]() << 16) | 
+                            (data[i + 9].cast[DType.uint32]() << 8) | 
+                             data[i + 8].cast[DType.uint32]()
+
+        var val_4: UInt32 = (data[i + 15].cast[DType.uint32]() << 24) | 
+                            (data[i + 14].cast[DType.uint32]() << 16) | 
+                            (data[i + 13].cast[DType.uint32]() << 8) | 
+                             data[i + 12].cast[DType.uint32]()
+
+        var val_5: UInt32 = (data[i + 19].cast[DType.uint32]() << 24) | 
+                            (data[i + 18].cast[DType.uint32]() << 16) | 
+                            (data[i + 17].cast[DType.uint32]() << 8) | 
+                             data[i + 16].cast[DType.uint32]()
+
+        var val_6: UInt32 = (data[i + 23].cast[DType.uint32]() << 24) | 
+                            (data[i + 22].cast[DType.uint32]() << 16) | 
+                            (data[i + 21].cast[DType.uint32]() << 8) | 
+                             data[i + 20].cast[DType.uint32]()
+
+        var val_7: UInt32 = (data[i + 27].cast[DType.uint32]() << 24) | 
+                            (data[i + 26].cast[DType.uint32]() << 16) | 
+                            (data[i + 25].cast[DType.uint32]() << 8) | 
+                             data[i + 24].cast[DType.uint32]()
+
+        var val_8: UInt32 = (data[i + 31].cast[DType.uint32]() << 24) | 
+                            (data[i + 30].cast[DType.uint32]() << 16) | 
+                            (data[i + 29].cast[DType.uint32]() << 8) | 
+                             data[i + 28].cast[DType.uint32]()
+
+
+        var val_9: UInt32 = (data[i + 35].cast[DType.uint32]() << 24) | 
+                            (data[i + 34].cast[DType.uint32]() << 16) | 
+                            (data[i + 33].cast[DType.uint32]() << 8) | 
+                             data[i + 32].cast[DType.uint32]()
+
+        var val_10: UInt32 =(data[i + 39].cast[DType.uint32]() << 24) | 
+                            (data[i + 38].cast[DType.uint32]() << 16) | 
+                            (data[i + 37].cast[DType.uint32]() << 8) | 
+                             data[i + 36].cast[DType.uint32]()
+
+        var val_11: UInt32 =(data[i + 43].cast[DType.uint32]() << 24) | 
+                            (data[i + 42].cast[DType.uint32]() << 16) | 
+                            (data[i + 41].cast[DType.uint32]() << 8) | 
+                             data[i + 40].cast[DType.uint32]()
+
+        var val_12: UInt32 =(data[i + 47].cast[DType.uint32]() << 24) | 
+                            (data[i + 46].cast[DType.uint32]() << 16) | 
+                            (data[i + 45].cast[DType.uint32]() << 8) | 
+                             data[i + 44].cast[DType.uint32]()
+
+        var val_13: UInt32 =(data[i + 51].cast[DType.uint32]() << 24) | 
+                            (data[i + 50].cast[DType.uint32]() << 16) | 
+                            (data[i + 49].cast[DType.uint32]() << 8) | 
+                             data[i + 48].cast[DType.uint32]()
+
+        var val_14: UInt32 =(data[i + 55].cast[DType.uint32]() << 24) | 
+                            (data[i + 54].cast[DType.uint32]() << 16) | 
+                            (data[i + 53].cast[DType.uint32]() << 8) | 
+                             data[i + 52].cast[DType.uint32]()
+
+        var val_15: UInt32 =(data[i + 59].cast[DType.uint32]() << 24) | 
+                            (data[i + 58].cast[DType.uint32]() << 16) | 
+                            (data[i + 57].cast[DType.uint32]() << 8) | 
+                             data[i + 56].cast[DType.uint32]()
+
+        var val_16: UInt32 =(data[i + 63].cast[DType.uint32]() << 24) | 
+                            (data[i + 62].cast[DType.uint32]() << 16) | 
+                            (data[i + 61].cast[DType.uint32]() << 8) | 
+                             data[i + 60].cast[DType.uint32]()
+
+        var index_1 = crc32 ^ val_1.cast[DType.uint32]()
+        var index_2 = val_2.cast[DType.uint32]()
+        var index_3 = val_3.cast[DType.uint32]()
+        var index_4 = val_4.cast[DType.uint32]()
+        var index_5 = val_5.cast[DType.uint32]()
+        var index_6 = val_6.cast[DType.uint32]()
+        var index_7 = val_7.cast[DType.uint32]()
+        var index_8 = val_8.cast[DType.uint32]()
+        var index_9 = val_9.cast[DType.uint32]()
+        var index_10 = val_10.cast[DType.uint32]()
+        var index_11 = val_11.cast[DType.uint32]()
+        var index_12 = val_12.cast[DType.uint32]()
+        var index_13 = val_13.cast[DType.uint32]()
+        var index_14 = val_14.cast[DType.uint32]()
+        var index_15 = val_15.cast[DType.uint32]()
+        var index_16 = val_16.cast[DType.uint32]()
+
+        crc32 = table[0*256 + int((index_16 >> 24).cast[DType.uint8]())] ^
+                table[1*256 + int((index_16 >> 16).cast[DType.uint8]())] ^
+                table[2*256 + int((index_16 >> 8).cast[DType.uint8]())] ^
+                table[3*256 + int((index_16 >> 0).cast[DType.uint8]())] ^
+                table[4*256 + int((index_15 >> 24).cast[DType.uint8]())] ^
+                table[5*256 + int((index_15 >> 16).cast[DType.uint8]())] ^
+                table[6*256 + int((index_15 >> 8).cast[DType.uint8]())] ^
+                table[7*256 + int((index_15 >> 0).cast[DType.uint8]())] ^
+                table[8*256 + int((index_14 >> 24).cast[DType.uint8]())] ^
+                table[9*256 + int((index_14 >> 16).cast[DType.uint8]())] ^
+                table[10*256 + int((index_14 >> 8).cast[DType.uint8]())] ^
+                table[11*256 + int((index_14 >> 0).cast[DType.uint8]())] ^
+                table[12*256 + int((index_13 >> 24).cast[DType.uint8]())] ^
+                table[13*256 + int((index_13 >> 16).cast[DType.uint8]())] ^
+                table[14*256 + int((index_13 >> 8).cast[DType.uint8]())] ^
+                table[15*256 + int((index_13 >> 0).cast[DType.uint8]())] ^
+                table[16*256 + int((index_12 >> 24).cast[DType.uint8]())] ^
+                table[17*256 + int((index_12 >> 16).cast[DType.uint8]())] ^
+                table[18*256 + int((index_12 >> 8).cast[DType.uint8]())] ^
+                table[19*256 + int((index_12 >> 0).cast[DType.uint8]())] ^
+                table[20*256 + int((index_11 >> 24).cast[DType.uint8]())] ^
+                table[21*256 + int((index_11 >> 16).cast[DType.uint8]())] ^
+                table[22*256 + int((index_11 >> 8).cast[DType.uint8]())] ^
+                table[23*256 + int((index_11 >> 0).cast[DType.uint8]())] ^
+                table[24*256 + int((index_10 >> 24).cast[DType.uint8]())] ^
+                table[25*256 + int((index_10 >> 16).cast[DType.uint8]())] ^
+                table[26*256 + int((index_10 >> 8).cast[DType.uint8]())] ^
+                table[27*256 + int((index_10 >> 0).cast[DType.uint8]())] ^
+                table[28*256 + int((index_9 >> 24).cast[DType.uint8]())] ^
+                table[29*256 + int((index_9 >> 16).cast[DType.uint8]())] ^
+                table[30*256 + int((index_9 >> 8).cast[DType.uint8]())] ^
+                table[31*256 + int((index_9 >> 0).cast[DType.uint8]())] ^
+                table[32*256 + int((index_8 >> 24).cast[DType.uint8]())] ^
+                table[33*256 + int((index_8 >> 16).cast[DType.uint8]())] ^
+                table[34*256 + int((index_8 >> 8).cast[DType.uint8]())] ^
+                table[35*256 + int((index_8 >> 0).cast[DType.uint8]())] ^
+                table[36*256 + int((index_7 >> 24).cast[DType.uint8]())] ^
+                table[37*256 + int((index_7 >> 16).cast[DType.uint8]())] ^
+                table[38*256 + int((index_7 >> 8).cast[DType.uint8]())] ^
+                table[39*256 + int((index_7 >> 0).cast[DType.uint8]())] ^
+                table[40*256 + int((index_6 >> 24).cast[DType.uint8]())] ^
+                table[41*256 + int((index_6 >> 16).cast[DType.uint8]())] ^
+                table[42*256 + int((index_6 >> 8).cast[DType.uint8]())] ^
+                table[43*256 + int((index_6 >> 0).cast[DType.uint8]())] ^
+                table[44*256 + int((index_5 >> 24).cast[DType.uint8]())] ^
+                table[45*256 + int((index_5 >> 16).cast[DType.uint8]())] ^
+                table[46*256 + int((index_5 >> 8).cast[DType.uint8]())] ^
+                table[47*256 + int((index_5 >> 0).cast[DType.uint8]())] ^
+                table[48*256 + int((index_4 >> 24).cast[DType.uint8]())] ^
+                table[49*256 + int((index_4 >> 16).cast[DType.uint8]())] ^
+                table[50*256 + int((index_4 >> 8).cast[DType.uint8]())] ^
+                table[51*256 + int((index_4 >> 0).cast[DType.uint8]())] ^
+                table[52*256 + int((index_3 >> 24).cast[DType.uint8]())] ^
+                table[53*256 + int((index_3 >> 16).cast[DType.uint8]())] ^
+                table[54*256 + int((index_3 >> 8).cast[DType.uint8]())] ^
+                table[55*256 + int((index_3 >> 0).cast[DType.uint8]())] ^
+                table[56*256 + int((index_2 >> 24).cast[DType.uint8]())] ^
+                table[57*256 + int((index_2 >> 16).cast[DType.uint8]())] ^
+                table[58*256 + int((index_2 >> 8).cast[DType.uint8]())] ^
+                table[59*256 + int((index_2 >> 0).cast[DType.uint8]())] ^
+                table[60*256 + int((index_1 >> 24).cast[DType.uint8]())] ^
+                table[61*256 + int((index_1 >> 16).cast[DType.uint8]())] ^
+                table[62*256 + int((index_1 >> 8).cast[DType.uint8]())] ^
+                table[63*256 + int((index_1 >> 0).cast[DType.uint8]())] 
+    
+    for i in range(size*length, size*length + extra ):
+        var index = (crc32 ^ data[i].cast[DType.uint32]()) & 0xff
+        crc32 = table[int(index)] ^ (crc32 >> 8)
+
+
+    return crc32^0xffffffff
+
 fn CRC32_table_n_byte_compact[
     size: Int
 ](owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32]) -> SIMD[DType.uint32, 1]:
@@ -186,7 +470,7 @@ fn CRC32_table_n_byte_compact[
         var index = (crc32 ^ data[i].cast[DType.uint32]()) & 0xFF
         crc32 = table[int(index)] ^ (crc32 >> 8)
 
-    return crc32 ^ 0xFFFFFFFF
+    return ~crc32 #^ 0xFFFFFFFF
 
 fn CRC32_table_8_byte2(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32]) -> SIMD[DType.uint32, 1]:
     var crc32: UInt32 = 0xFFFFFFFF
@@ -236,6 +520,7 @@ fn run_32_table_8_byte_2[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]](
     var a = CRC32_table_8_byte2(data, table)
     benchmark.keep(a)
 
+
 fn run_32_table_16_byte[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]]():
     var a = CRC32_table_16_byte(data, table)
     benchmark.keep(a)
@@ -244,10 +529,21 @@ fn run_32_table_16_byte_compact[data: List[SIMD[DType.uint8, 1]], table: List[UI
     var a = CRC32_table_n_byte_compact[16](data, table)
     benchmark.keep(a)
 
+fn run_32_table_32_byte[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]]():
+    var a = CRC32_table_32_byte(data, table)
+    benchmark.keep(a)
+
 fn run_32_table_32_byte_compact[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]]():
     var a = CRC32_table_n_byte_compact[32](data, table)
     benchmark.keep(a)
 
+fn run_32_table_64_byte[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]]():
+    var a = CRC32_table_64_byte(data, table)
+    benchmark.keep(a)
+
+fn run_32_table_64_byte_compact[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]]():
+    var a = CRC32_table_n_byte_compact[64](data, table)
+    benchmark.keep(a)
 
 fn bench() raises:
     alias fill_size = 2**20
@@ -261,7 +557,7 @@ fn bench() raises:
 
     var baseline_crc = CRC32(rand_list)
 
-    var report = benchmark.run[run_32[rand_list]](max_runtime_secs=5
+    var report = benchmark.run[run_32[rand_list]](max_runtime_secs=0.5
     ).mean(benchmark.Unit.ms)
     print("Baseline: \t", report)
 
@@ -269,7 +565,7 @@ fn bench() raises:
 
     assert_equal(baseline_crc, CRC32_table_8_byte(rand_list, little_endian_table_8_byte))
 
-    var report_8 = benchmark.run[run_32_table_8_byte[rand_list, little_endian_table_8_byte]](max_runtime_secs=5).mean(
+    var report_8 = benchmark.run[run_32_table_8_byte[rand_list, little_endian_table_8_byte]](max_runtime_secs=0.5).mean(
         benchmark.Unit.ms
     )
     print("8 Byte: \t", report_8)
@@ -277,7 +573,7 @@ fn bench() raises:
     assert_equal(baseline_crc, CRC32_table_n_byte_compact[8](rand_list, little_endian_table_8_byte))
 
     var report_8c = benchmark.run[run_32_table_8_byte_compact[rand_list, little_endian_table_8_byte]](
-        max_runtime_secs=5
+        max_runtime_secs=0.5
     ).mean(benchmark.Unit.ms)
     print("8 Byte (c): \t", report_8c)
 
@@ -285,17 +581,16 @@ fn bench() raises:
     assert_equal(baseline_crc, CRC32_table_8_byte2(rand_list, little_endian_table_8_byte))
 
     var report_8_2 = benchmark.run[run_32_table_8_byte_2[rand_list, little_endian_table_8_byte]](
-        max_runtime_secs=5
+        max_runtime_secs=0.5
     ).mean(benchmark.Unit.ms)
     print("8 Byte 2: \t", report_8_2)
-
 
     alias little_endian_table_16_byte = fill_table_n_byte[16]()
 
 
     assert_equal(baseline_crc, CRC32_table_16_byte(rand_list, little_endian_table_16_byte))
 
-    var report_16 = benchmark.run[run_32_table_16_byte[rand_list, little_endian_table_16_byte]](max_runtime_secs=5).mean(
+    var report_16 = benchmark.run[run_32_table_16_byte[rand_list, little_endian_table_16_byte]](max_runtime_secs=0.5).mean(
         benchmark.Unit.ms
     )
     print("16 Byte: \t", report_16)
@@ -304,28 +599,57 @@ fn bench() raises:
 
 
     var report_16c = benchmark.run[run_32_table_16_byte_compact[rand_list, little_endian_table_16_byte]](
-        max_runtime_secs=5
+        max_runtime_secs=0.5
     ).mean(benchmark.Unit.ms)
     print("16 Byte (c): \t", report_16c)
 
 
     alias little_endian_table_32_byte = fill_table_n_byte[32]()
 
+    assert_equal(baseline_crc, CRC32_table_32_byte(rand_list, little_endian_table_32_byte))
+
+
+    var report_32 = benchmark.run[run_32_table_32_byte[rand_list, little_endian_table_32_byte]](
+        max_runtime_secs=0.5
+    ).mean(benchmark.Unit.ms)
+    print("32 Byte: \t", report_32)
+
     assert_equal(baseline_crc, CRC32_table_n_byte_compact[32](rand_list, little_endian_table_32_byte))
 
 
     var report_32c = benchmark.run[run_32_table_32_byte_compact[rand_list, little_endian_table_32_byte]](
-        max_runtime_secs=5
+        max_runtime_secs=0.5
     ).mean(benchmark.Unit.ms)
     print("32 Byte (c): \t", report_32c)
 
-    print("Speedup 8 Byte: \t", 100 * (report/report_8 -1))
-    print("Speedup 8 Byte (c): \t", 100 * (report/report_8c -1))
-    print("Speedup 8 2 Byte: \t", 100 * (report/report_8_2 -1))
-    print("Speedup 16 Byte: \t", 100 * (report/report_16 -1))
-    print("Speedup 16 Byte (c): \t", 100 * (report/report_16c -1))
-    print("Speedup 32 Byte (c): \t", 100 * (report/report_32c -1))
+    alias little_endian_table_64_byte = fill_table_n_byte[64]()
 
+    assert_equal(baseline_crc, CRC32_table_64_byte(rand_list, little_endian_table_64_byte))
+
+
+    var report_64 = benchmark.run[run_32_table_64_byte[rand_list, little_endian_table_64_byte]](
+        max_runtime_secs=0.5
+    ).mean(benchmark.Unit.ms)
+    print("64 Byte: \t", report_64)
+
+    assert_equal(baseline_crc, CRC32_table_n_byte_compact[64](rand_list, little_endian_table_64_byte))
+
+
+    var report_64c = benchmark.run[run_32_table_64_byte_compact[rand_list, little_endian_table_64_byte]](
+        max_runtime_secs=0.5
+    ).mean(benchmark.Unit.ms)
+    print("64 Byte (c): \t", report_64c)
+
+
+    print("Speedup 8 Byte: \t",  (report/report_8 -1))
+    print("Speedup 8 Byte (c): \t",  (report/report_8c -1))
+    print("Speedup 8 2 Byte: \t",  (report/report_8_2 -1))
+    print("Speedup 16 Byte: \t",  (report/report_16 -1))
+    print("Speedup 16 Byte (c): \t",  (report/report_16c -1))
+    print("Speedup 32 Byte: \t",  (report/report_32 -1))
+    print("Speedup 32 Byte (c): \t",  (report/report_32c -1))
+    print("Speedup 64 Byte: \t",  (report/report_64 -1))
+    print("Speedup 64 Byte (c): \t",  (report/report_64c -1))
 
 
 fn main() raises:
