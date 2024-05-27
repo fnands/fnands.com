@@ -50,8 +50,8 @@ fn CRC32_table_8_byte(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32
                             (data[i + 5].cast[DType.uint32]() << 8) | 
                              data[i + 4].cast[DType.uint32]()
 
-        var index_1 = crc32 ^ val_1#.cast[DType.uint32]()
-        var index_2 = val_2#.cast[DType.uint32]()
+        var index_1 = crc32 ^ val_1
+        var index_2 = val_2
         crc32 = table[4*256 + int((index_1 >> 24).cast[DType.uint8]())] ^
                 table[5*256 + int((index_1 >> 16).cast[DType.uint8]())] ^
                 table[6*256 + int((index_1 >> 8).cast[DType.uint8]())] ^
