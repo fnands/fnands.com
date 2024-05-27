@@ -25,26 +25,22 @@ fn fill_table_n_byte[n: Int]() -> List[UInt32]:
     return table
 
 
-fn CRC32_table_8_byte(
-    owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32]
-) -> SIMD[DType.uint32, 1]:
+fn CRC32_table_8_byte(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32]) -> SIMD[DType.uint32, 1]:
     var crc32: UInt32 = 0xFFFFFFFF
     var size = 8
     var length = len(data) // size
     var extra = len(data) % size
 
     for i in range(start=0, end=length * size, step=size):
-        var val_1: UInt32 = (data[i + 3].cast[DType.uint32]() << 24) | (
-            data[i + 2].cast[DType.uint32]() << 16
-        ) | (data[i + 1].cast[DType.uint32]() << 8) | data[i + 0].cast[
-            DType.uint32
-        ]()
+        var val_1: UInt32 = (data[i + 3].cast[DType.uint32]() << 24) 
+                          | (data[i + 2].cast[DType.uint32]() << 16) 
+                          | (data[i + 1].cast[DType.uint32]() << 8)
+                          | (data[i + 0].cast[DType.uint32]() << 0)
 
-        var val_2: UInt32 = (data[i + 7].cast[DType.uint32]() << 24) | (
-            data[i + 6].cast[DType.uint32]() << 16
-        ) | (data[i + 5].cast[DType.uint32]() << 8) | data[i + 4].cast[
-            DType.uint32
-        ]()
+        var val_2: UInt32 = (data[i + 7].cast[DType.uint32]() << 24) 
+                          | (data[i + 6].cast[DType.uint32]() << 16) 
+                          | (data[i + 5].cast[DType.uint32]() << 8) 
+                          | (data[i + 4].cast[DType.uint32]() << 0)
 
         var index_1 = crc32 ^ val_1
         var index_2 = val_2
@@ -68,9 +64,7 @@ fn CRC32_table_8_byte(
 
 fn CRC32_table_n_byte_compact[
     size: Int
-](owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32]) -> SIMD[
-    DType.uint32, 1
-]:
+](owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32]) -> SIMD[DType.uint32, 1]:
     var crc32: UInt32 = 0xFFFFFFFF
 
     alias step_size = 32 // size
@@ -98,9 +92,7 @@ fn CRC32_table_n_byte_compact[
             n = size - j * step_size
             crc32 = (
                 table[(n - 4) * 256 + int((vals[j] >> 24).cast[DType.uint8]())]
-                ^ table[
-                    (n - 3) * 256 + int((vals[j] >> 16).cast[DType.uint8]())
-                ]
+                ^ table[(n - 3) * 256 + int((vals[j] >> 16).cast[DType.uint8]())]
                 ^ table[(n - 2) * 256 + int((vals[j] >> 8).cast[DType.uint8]())]
                 ^ table[(n - 1) * 256 + int((vals[j] >> 0).cast[DType.uint8]())]
                 ^ crc32
@@ -118,9 +110,7 @@ fn run_32_table_8_byte[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]]():
     benchmark.keep(a)
 
 
-fn run_32_table_8_byte_compact[
-    data: List[SIMD[DType.uint8, 1]], table: List[UInt32]
-]():
+fn run_32_table_8_byte_compact[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]]():
     var a = CRC32_table_n_byte_compact[8](data, table)
     benchmark.keep(a)
 
@@ -130,24 +120,22 @@ fn bench():
     alias g = UnsafePointer[SIMD[DType.uint8, 1]].alloc(fill_size)
     rand[DType.uint8](ptr=g, size=fill_size)
 
-    alias rand_list = List[SIMD[DType.uint8, 1]](
-        data=g, size=fill_size, capacity=fill_size
-    )
+    alias rand_list = List[SIMD[DType.uint8, 1]](data=g, size=fill_size, capacity=fill_size)
 
     print(len(rand_list))
 
     alias little_endian_table_8_byte = fill_table_n_byte[8]()
 
-    var report_6 = benchmark.run[
-        run_32_table_8_byte[rand_list, little_endian_table_8_byte]
-    ](max_runtime_secs=5).mean(benchmark.Unit.ms)
+    var report_6 = benchmark.run[run_32_table_8_byte[rand_list, little_endian_table_8_byte]](max_runtime_secs=5).mean(
+        benchmark.Unit.ms
+    )
     print(report_6)
 
     alias little_endian_table_16_byte = fill_table_n_byte[8]()
 
-    var report_7 = benchmark.run[
-        run_32_table_8_byte_compact[rand_list, little_endian_table_8_byte]
-    ](max_runtime_secs=5).mean(benchmark.Unit.ms)
+    var report_7 = benchmark.run[run_32_table_8_byte_compact[rand_list, little_endian_table_8_byte]](
+        max_runtime_secs=5
+    ).mean(benchmark.Unit.ms)
     print(report_7)
 
 
