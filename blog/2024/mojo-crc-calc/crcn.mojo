@@ -641,15 +641,15 @@ fn bench() raises:
     print("64 Byte (c): \t", report_64c)
 
 
-    print("Speedup 8 Byte: \t",  (report/report_8 -1))
-    print("Speedup 8 Byte (c): \t",  (report/report_8c -1))
-    print("Speedup 8 2 Byte: \t",  (report/report_8_2 -1))
-    print("Speedup 16 Byte: \t",  (report/report_16 -1))
-    print("Speedup 16 Byte (c): \t",  (report/report_16c -1))
-    print("Speedup 32 Byte: \t",  (report/report_32 -1))
-    print("Speedup 32 Byte (c): \t",  (report/report_32c -1))
-    print("Speedup 64 Byte: \t",  (report/report_64 -1))
-    print("Speedup 64 Byte (c): \t",  (report/report_64c -1))
+    print("Speedup 8 Byte: \t",  (report/report_8))
+    print("Speedup 8 Byte (c): \t",  (report/report_8c))
+    print("Speedup 8 2 Byte: \t",  (report/report_8_2))
+    print("Speedup 16 Byte: \t",  (report/report_16))
+    print("Speedup 16 Byte (c): \t",  (report/report_16c))
+    print("Speedup 32 Byte: \t",  (report/report_32 ))
+    print("Speedup 32 Byte (c): \t",  (report/report_32c))
+    print("Speedup 64 Byte: \t",  (report/report_64))
+    print("Speedup 64 Byte (c): \t",  (report/report_64c))
 
 
 fn main() raises:
