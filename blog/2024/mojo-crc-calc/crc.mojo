@@ -1,5 +1,6 @@
 import benchmark
 from random import rand, seed
+from math.bit import bitreverse
 
 
 fn fill_table_n_byte[n: Int]() -> List[UInt32]:
@@ -24,6 +25,19 @@ fn fill_table_n_byte[n: Int]() -> List[UInt32]:
 
     return table
 
+
+fn CRC32(owned data: List[SIMD[DType.uint8, 1]]) -> SIMD[DType.uint32, 1]:
+    var crc32: UInt32 = 0xffffffff
+    for byte in data:
+        crc32 = (bitreverse(byte[]).cast[DType.uint32]() << 24) ^ crc32
+        for i in range(8):
+            
+            if crc32 & 0x80000000 != 0:
+                crc32 = (crc32 << 1) ^ 0x04c11db7
+            else:
+                crc32 = crc32 << 1
+
+    return bitreverse(crc32^0xffffffff)
 
 fn CRC32_table_8_byte(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32]) -> SIMD[DType.uint32, 1]:
     var crc32: UInt32 = 0xFFFFFFFF
@@ -105,6 +119,11 @@ fn CRC32_table_n_byte_compact[
     return crc32 ^ 0xFFFFFFFF
 
 
+fn run_32[data: List[SIMD[DType.uint8, 1]] ]():
+    var a =  CRC32(data)
+    benchmark.keep(a)
+
+
 fn run_32_table_8_byte[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]]():
     var a = CRC32_table_8_byte(data, table)
     benchmark.keep(a)
@@ -122,21 +141,28 @@ fn bench():
 
     alias rand_list = List[SIMD[DType.uint8, 1]](data=g, size=fill_size, capacity=fill_size)
 
-    print(len(rand_list))
+    print( len(rand_list))
+
+    var report = benchmark.run[run_32[rand_list]](max_runtime_secs=5
+    ).mean(benchmark.Unit.ms)
+    print("Baseline: \t", report)
 
     alias little_endian_table_8_byte = fill_table_n_byte[8]()
 
-    var report_6 = benchmark.run[run_32_table_8_byte[rand_list, little_endian_table_8_byte]](max_runtime_secs=5).mean(
+    var report_8 = benchmark.run[run_32_table_8_byte[rand_list, little_endian_table_8_byte]](max_runtime_secs=5).mean(
         benchmark.Unit.ms
     )
-    print(report_6)
+    print("8 Byte: \t", report_8)
 
     alias little_endian_table_16_byte = fill_table_n_byte[8]()
 
-    var report_7 = benchmark.run[run_32_table_8_byte_compact[rand_list, little_endian_table_8_byte]](
+    var report_8c = benchmark.run[run_32_table_8_byte_compact[rand_list, little_endian_table_8_byte]](
         max_runtime_secs=5
     ).mean(benchmark.Unit.ms)
-    print(report_7)
+    print("8 Byte (c): \t", report_8c)
+
+    print("Speedup 8 Byte: \t", 100 * (report/report_8 -1))
+    print("Speedup 8 Byte (c): \t", 100 * (report/report_8c -1))
 
 
 fn main():
