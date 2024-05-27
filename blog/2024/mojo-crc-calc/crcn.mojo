@@ -1,6 +1,6 @@
 import benchmark
 from random import rand, seed
-from math.bit import bitreverse, bswap
+from bit import bit_reverse, byte_reverse
 from testing import assert_equal
 
 fn fill_table_n_byte[n: Int]() -> List[UInt32]:
@@ -29,7 +29,7 @@ fn fill_table_n_byte[n: Int]() -> List[UInt32]:
 fn CRC32(owned data: List[SIMD[DType.uint8, 1]]) -> SIMD[DType.uint32, 1]:
     var crc32: UInt32 = 0xffffffff
     for byte in data:
-        crc32 = (bitreverse(byte[]).cast[DType.uint32]() << 24) ^ crc32
+        crc32 = (bit_reverse(byte[]).cast[DType.uint32]() << 24) ^ crc32
         for i in range(8):
             
             if crc32 & 0x80000000 != 0:
@@ -37,7 +37,7 @@ fn CRC32(owned data: List[SIMD[DType.uint8, 1]]) -> SIMD[DType.uint32, 1]:
             else:
                 crc32 = crc32 << 1
 
-    return bitreverse(crc32^0xffffffff)
+    return bit_reverse(crc32^0xffffffff)
 
 fn CRC32_table_8_byte(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32]) -> SIMD[DType.uint32, 1]:
     var crc32: UInt32 = 0xFFFFFFFF
@@ -156,7 +156,7 @@ fn CRC32_table_n_byte_compact[
 
     for i in range(start=0, end=length * size, step=size):
 
-        @unroll
+        @parameter
         for j in range(units):
             vals[j] = (
                 (data[i + j * step_size + 3].cast[DType.uint32]() << 24)
@@ -178,7 +178,7 @@ fn CRC32_table_n_byte_compact[
             )
         
         crc32 = 0
-        @unroll
+        @parameter
         for j in range(units):
             crc32 = crc32^interm_crc[j]
 
@@ -205,10 +205,10 @@ fn CRC32_table_8_byte2(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt3
         val[0] = crc32 ^ val[0]
         var index: SIMD[DType.uint8, 8]
 
-        index = bitcast[DType.uint8, 8](bswap(val))
+        index = bitcast[DType.uint8, 8](byte_reverse(val))
 
         crc32 = 0
-        @unroll(8) 
+        @parameter
         for i in range(8):
             crc32 ^= table[((i + 4) % 8) * 256 + int(index[i])]
 
@@ -254,7 +254,8 @@ fn bench() raises:
     alias g = UnsafePointer[SIMD[DType.uint8, 1]].alloc(fill_size)
     rand[DType.uint8](ptr=g, size=fill_size)
 
-    alias rand_list = List[SIMD[DType.uint8, 1]](data=g, size=fill_size, capacity=fill_size)
+    #alias rand_list = List[SIMD[DType.uint8, 1]](data=g, size=fill_size, capacity=fill_size)
+    alias rand_list = List[SIMD[DType.uint8, 1]](unsafe_pointer=g, size=fill_size, capacity=fill_size)
 
     print( len(rand_list))
 
