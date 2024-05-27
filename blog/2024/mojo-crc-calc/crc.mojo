@@ -108,10 +108,10 @@ fn CRC32_table_16_byte(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt3
                             (data[i + 13].cast[DType.uint32]() << 8) | 
                              data[i + 12].cast[DType.uint32]()
 
-        var index_1 = crc32 ^ val_1.cast[DType.uint32]()
-        var index_2 = val_2.cast[DType.uint32]()
-        var index_3 = val_3.cast[DType.uint32]()
-        var index_4 = val_4.cast[DType.uint32]()
+        var index_1 = crc32 ^ val_1
+        var index_2 = val_2
+        var index_3 = val_3
+        var index_4 = val_4
 
         crc32 = table[0*256 + int((index_4 >> 24).cast[DType.uint8]())] ^
                 table[1*256 + int((index_4 >> 16).cast[DType.uint8]())] ^
@@ -150,10 +150,13 @@ fn CRC32_table_n_byte_compact[
 
     var vals = List[UInt32](capacity=units)
     vals.size = units
+    var interm_crc = List[UInt32](capacity=units)
+    interm_crc.size = units
     var n = 0
+
     for i in range(start=0, end=length * size, step=size):
 
-        @unroll(units)
+        @unroll
         for j in range(units):
             vals[j] = (
                 (data[i + j * step_size + 3].cast[DType.uint32]() << 24)
@@ -164,16 +167,21 @@ fn CRC32_table_n_byte_compact[
 
             if j == 0:
                 vals[0] = vals[0] ^ crc32
-                crc32 = 0
+                
 
             n = size - j * step_size
-            crc32 = (
+            interm_crc[j] = (
                 table[(n - 4) * 256 + int((vals[j] >> 24).cast[DType.uint8]())]
                 ^ table[(n - 3) * 256 + int((vals[j] >> 16).cast[DType.uint8]())]
                 ^ table[(n - 2) * 256 + int((vals[j] >> 8).cast[DType.uint8]())]
-                ^ table[(n - 1) * 256 + int((vals[j] >> 0).cast[DType.uint8]())]
-                ^ crc32
+                ^ table[(n - 1) * 256 + int((vals[j] >> 0).cast[DType.uint8]())]     
             )
+        
+        crc32 = 0
+        @unroll
+        for j in range(units):
+            crc32 = crc32^interm_crc[j]
+
     for i in range(size * length, size * length + extra):
         var index = (crc32 ^ data[i].cast[DType.uint32]()) & 0xFF
         crc32 = table[int(index)] ^ (crc32 >> 8)
@@ -273,8 +281,6 @@ fn bench() raises:
     print("8 Byte (c): \t", report_8c)
 
 
-    print("8 Byte: \t", report_8)
-
     assert_equal(baseline_crc, CRC32_table_8_byte2(rand_list, little_endian_table_8_byte))
 
     var report_8_2 = benchmark.run[run_32_table_8_byte_2[rand_list, little_endian_table_8_byte]](
@@ -314,7 +320,7 @@ fn bench() raises:
 
     print("Speedup 8 Byte: \t", 100 * (report/report_8 -1))
     print("Speedup 8 Byte (c): \t", 100 * (report/report_8c -1))
-    print("Speedup 8 2 Byte (c): \t", 100 * (report/report_8_2 -1))
+    print("Speedup 8 2 Byte: \t", 100 * (report/report_8_2 -1))
     print("Speedup 16 Byte: \t", 100 * (report/report_16 -1))
     print("Speedup 16 Byte (c): \t", 100 * (report/report_16c -1))
     #print("Speedup 32 Byte (c): \t", 100 * (report/report_32c -1))
