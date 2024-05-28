@@ -1,3 +1,14 @@
+---
+layout: post
+title: CRC
+categories: [mojo]
+date: "209-05-99"
+author: "Kareem Omar"
+draft: true
+description: Post by Kareem Omar. Keeping it here in case he ever deletes his.  
+---
+
+
 Computing is just the process of transforming and moving data. When data is moved through a channel or stored in a medium, there is some possibility of corruption: the chance that when the data is read back out on the receiving end, it's wrong - different than what was sent/stored. If we care enough about the data, we may want to perform some kind of verification to at least detect, if not correct, errors.
 
 We often do care about our data's correctness, so the problem of verifying integrity proves quite ubiquitous. This very text likely made its way through MANY such verifications on its way to you - the data transfer mechanisms of Wi-Fi, Ethernet, and HDMI all verify every bit of data sent through them, for example.
