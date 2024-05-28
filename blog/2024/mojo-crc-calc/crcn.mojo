@@ -146,8 +146,6 @@ fn CRC32_table_32_byte(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt3
     var length = len(data)//size
     var extra = len(data) % size
 
-
-
     for i in range(start = 0, end = length*size, step = size):
         
         var val_1: UInt32 = (data[i + 3].cast[DType.uint32]() << 24) | 
@@ -421,9 +419,11 @@ fn CRC32_table_64_byte(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt3
 
     return crc32^0xffffffff
 
+from sys.intrinsics import PrefetchLocality, PrefetchRW, PrefetchCache, PrefetchOptions, prefetch
+
 fn CRC32_table_n_byte_compact[
     size: Int
-](owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32]) -> SIMD[DType.uint32, 1]:
+](borrowed data: List[SIMD[DType.uint8, 1]], borrowed table: List[UInt32]) -> SIMD[DType.uint32, 1]:
     var crc32: UInt32 = 0xFFFFFFFF
 
     alias step_size = 4
@@ -438,8 +438,10 @@ fn CRC32_table_n_byte_compact[
     interm_crc.size = units
     var n = 0
 
-    for i in range(start=0, end=length * size, step=size):
+    #alias prefetch_options = PrefetchOptions().for_read().high_locality().to_data_cache()
+    #prefetch[prefetch_options, DType.uint32](table.unsafe_ptr())
 
+    for i in range(start=0, end=length * size, step=size):
         @parameter
         for j in range(units):
             vals[j] = (
@@ -451,8 +453,11 @@ fn CRC32_table_n_byte_compact[
 
             if j == 0:
                 vals[0] = vals[0] ^ crc32
-                
 
+        
+        crc32 = 0 
+        @parameter
+        for j in range(units):
             n = size - j * step_size
             interm_crc[j] = (
                 table[(n - 4) * 256 + int((vals[j] >> 24).cast[DType.uint8]())]
@@ -461,16 +466,18 @@ fn CRC32_table_n_byte_compact[
                 ^ table[(n - 1) * 256 + int((vals[j] >> 0).cast[DType.uint8]())]     
             )
         
-        crc32 = 0
-        @parameter
-        for j in range(units):
+        #crc32 = 0
+        #@parameter
+        #for j in range(units):
             crc32 = crc32^interm_crc[j]
 
     for i in range(size * length, size * length + extra):
         var index = (crc32 ^ data[i].cast[DType.uint32]()) & 0xFF
         crc32 = table[int(index)] ^ (crc32 >> 8)
 
-    return ~crc32 #^ 0xFFFFFFFF
+    return crc32 ^ 0xFFFFFFFF
+
+
 
 fn CRC32_table_8_byte2(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt32]) -> SIMD[DType.uint32, 1]:
     var crc32: UInt32 = 0xFFFFFFFF
@@ -641,15 +648,15 @@ fn bench() raises:
     print("64 Byte (c): \t", report_64c)
 
 
-    print("Speedup 8 Byte: \t",  (report/report_8))
-    print("Speedup 8 Byte (c): \t",  (report/report_8c))
-    print("Speedup 8 2 Byte: \t",  (report/report_8_2))
-    print("Speedup 16 Byte: \t",  (report/report_16))
-    print("Speedup 16 Byte (c): \t",  (report/report_16c))
-    print("Speedup 32 Byte: \t",  (report/report_32 ))
-    print("Speedup 32 Byte (c): \t",  (report/report_32c))
-    print("Speedup 64 Byte: \t",  (report/report_64))
-    print("Speedup 64 Byte (c): \t",  (report/report_64c))
+    print("Speedup 8 Byte: \t",  int(round(report/report_8)))
+    print("Speedup 8 Byte (c): \t",  int(round(report/report_8c)))
+    print("Speedup 8 2 Byte: \t",  int(round(report/report_8_2)))
+    print("Speedup 16 Byte: \t",  int(round(report/report_16)))
+    print("Speedup 16 Byte (c): \t",  int(round(report/report_16c)))
+    print("Speedup 32 Byte: \t",  int(round(report/report_32 )))
+    print("Speedup 32 Byte (c): \t",  int(round(report/report_32c)))
+    print("Speedup 64 Byte: \t",  int(round(report/report_64)))
+    print("Speedup 64 Byte (c): \t",  int(round(report/report_64c)))
 
 
 fn main() raises:
