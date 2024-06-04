@@ -5,7 +5,12 @@ from testing import assert_equal
 
 fn fill_table_n_byte[n: Int]() -> List[UInt32]:
     var table = List[UInt32](capacity=256 * n)
-    table.size = 256
+    table.size = 256*n
+
+    #var table = List[UInt32]()
+    #table.data = DTypePointer(table.unsafe_ptr()).alloc(256, alignment=64)
+    #table.size = 0
+    #table.capacity = 256
 
     for i in range(256 * n):
         if i < 256:
@@ -509,6 +514,88 @@ fn CRC32_table_8_byte2(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt3
 
     return crc32 ^ 0xFFFFFFFF
 
+
+fn fill_table_n_byte_simd[n: Int]() -> DTypePointer[DType.uint32]:
+
+    #alias size = 256*n
+    #var table = SIMD[DType.uint32, size](0)
+    var table = DTypePointer[DType.uint32].alloc(256*n, alignment=64)
+
+    for i in range(256*n):
+
+        if i < 256: 
+            var key = UInt8(i)
+            var crc32 = key.cast[DType.uint32]()
+            for i in range(8):
+                if crc32 & 1 != 0:
+                    crc32 = (crc32 >> 1) ^ 0xedb88320
+                else:
+                    crc32 = crc32 >> 1
+
+            table[i] = crc32
+        else:
+            var crc32 = table[i-256]
+            var index = int(crc32.cast[DType.uint8]())
+            table[i] = (crc32 >> 8) ^ table[index]
+            
+    return table
+
+fn CRC32_table_n_byte_compact_simd[
+    size: Int
+](borrowed data: List[SIMD[DType.uint8, 1]], borrowed table: DTypePointer[DType.uint32]) -> SIMD[DType.uint32, 1]:
+    var crc32: UInt32 = 0xFFFFFFFF
+
+    alias step_size = 4
+    alias units = size // step_size
+
+    var length = len(data) // size
+    var extra = len(data) % size
+
+    var vals = List[UInt32](capacity=units)
+    vals.size = units
+    var interm_crc = List[UInt32](capacity=units)
+    interm_crc.size = units
+    var n = 0
+
+    #alias prefetch_options = PrefetchOptions().for_read().high_locality().to_data_cache()
+    #prefetch[prefetch_options, DType.uint32](table.unsafe_ptr())
+
+    for i in range(start=0, end=length * size, step=size):
+        @parameter
+        for j in range(units):
+            vals[j] = (
+                (data[i + j * step_size + 3].cast[DType.uint32]() << 24)
+                | (data[i + j * step_size + 2].cast[DType.uint32]() << 16)
+                | (data[i + j * step_size + 1].cast[DType.uint32]() << 8)
+                | (data[i + j * step_size + 0].cast[DType.uint32]() << 0)
+            )
+
+            if j == 0:
+                vals[0] = vals[0] ^ crc32
+
+        
+        crc32 = 0 
+        @parameter
+        for j in range(units):
+            n = size - j * step_size
+            interm_crc[j] = (
+                table[(n - 4) * 256 + int((vals[j] >> 24).cast[DType.uint8]())]
+                ^ table[(n - 3) * 256 + int((vals[j] >> 16).cast[DType.uint8]())]
+                ^ table[(n - 2) * 256 + int((vals[j] >> 8).cast[DType.uint8]())]
+                ^ table[(n - 1) * 256 + int((vals[j] >> 0).cast[DType.uint8]())]     
+            )
+        
+        #crc32 = 0
+        #@parameter
+        #for j in range(units):
+            crc32 = crc32^interm_crc[j]
+
+    for i in range(size * length, size * length + extra):
+        var index = (crc32 ^ data[i].cast[DType.uint32]()) & 0xFF
+        crc32 = table[int(index)] ^ (crc32 >> 8)
+
+    return crc32 ^ 0xFFFFFFFF
+
 fn run_32[data: List[SIMD[DType.uint8, 1]] ]():
     var a =  CRC32(data)
     benchmark.keep(a)
@@ -542,6 +629,10 @@ fn run_32_table_32_byte[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]]()
 
 fn run_32_table_32_byte_compact[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]]():
     var a = CRC32_table_n_byte_compact[32](data, table)
+    benchmark.keep(a)
+
+fn run_32_table_32_byte_compact_simd[data: List[SIMD[DType.uint8, 1]], table: DTypePointer[DType.uint32]]():
+    var a = CRC32_table_n_byte_compact_simd[32](data, table)
     benchmark.keep(a)
 
 fn run_32_table_64_byte[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]]():
@@ -629,9 +720,20 @@ fn bench() raises:
     ).mean(benchmark.Unit.ms)
     print("32 Byte (c): \t", report_32c)
 
+    alias little_endian_table_32_byte_simd = fill_table_n_byte_simd[32]()
+
+    assert_equal(baseline_crc, CRC32_table_n_byte_compact_simd[32](rand_list, little_endian_table_32_byte_simd))
+
+
+    var report_32s = benchmark.run[run_32_table_32_byte_compact_simd[rand_list, little_endian_table_32_byte_simd]](
+        max_runtime_secs=0.5
+    ).mean(benchmark.Unit.ms)
+    print("32 Byte: \t", report_32s)
+
     alias little_endian_table_64_byte = fill_table_n_byte[64]()
 
     assert_equal(baseline_crc, CRC32_table_64_byte(rand_list, little_endian_table_64_byte))
+
 
 
     var report_64 = benchmark.run[run_32_table_64_byte[rand_list, little_endian_table_64_byte]](
@@ -660,5 +762,8 @@ fn bench() raises:
 
 
 fn main() raises:
+
+    #var little_endian_table_48_byte = fill_table_n_byte[64]()
+    #print(DTypePointer(little_endian_table_48_byte.unsafe_ptr()).is_aligned[128]())
     seed(614114419)
     bench()
