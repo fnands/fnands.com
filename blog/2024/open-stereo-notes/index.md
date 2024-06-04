@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Reading Notes: OpenStereo
-description: Some reading notes on the paper titled: *OpenStereo: A Comprehensive Benchmark for Stereo Matching and Strong Baseline*
+title: Reading Notes - OpenStereo
+description: Some reading notes on the paper titled *OpenStereo - A Comprehensive Benchmark for Stereo Matching and Strong Baseline*
 categories: [stereo, reading notes]
 draft: true
 date: "2099-05-04"
@@ -45,7 +45,7 @@ Eleven models are reconstructed using the OpenStereo framework and it is found t
 
 An ablation study is performed and it is found that: 
 
-* 
+
 
 
 ## Questions
