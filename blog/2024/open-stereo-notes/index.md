@@ -10,6 +10,8 @@ author: "Ferdinand Schenck"
 These are my notes on reading [OpenStereo: A Comprehensive Benchmark for
 Stereo Matching and Strong Baseline](https://arxiv.org/abs/2312.00343) by Xianda Guo, Juntao Lu, Chenming Zhang, Yiqi Wang, Yiqun Duan, Tian Yang, Zheng Zhu, and Long Chen.
 
+It's currently a pre-print, so might change a bit once published.
+
 
 ## Overview
 
