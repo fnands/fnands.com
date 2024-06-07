@@ -69,6 +69,8 @@ By combining the learning of the above ablation study a new baseline architectur
 
 When trained on only SceneFlow (a synthetic dataset) it shows strong generalization to the KITTI2012, KITTI2015, Middlebury and ETH3D datasets, beating the other implemented architectures. 
 
+Interestingly, the architecture they come up with is very similar to [IGEV-Stereo](https://arxiv.org/abs/2303.06615). 
+
 ## Questions
 
 * How will stereo methods that do not conform to the ED-Conv2D or CVM-Conv3D catagories be accommodated in OpenStereo? 
@@ -79,13 +81,14 @@ When trained on only SceneFlow (a synthetic dataset) it shows strong generalizat
     - The authors only test four different backbones. 
     - The largest is MobilenetV2 120d at 5.21M parameters. 
     - Does going even bigger do better? 
+* What are the key differences between StereoBase and IGEV-Stereo? Just a larger pre-trained backbone? 
 * Given this framework, could a neural architecture search be performed over an even larger set of backbones and components to find an even better architecture? 
 * Does it make sense to also create a public leaderboard? 
     - Might be hard with the KITTI datasets that have their own board
 
 ## Key Takeways
 
-The authors to a great job of categorizing recent developments in deep stereo matching and putting them on an equal footing.   
+The authors do a great job of categorizing recent developments in deep stereo matching and putting them on an equal footing.   
 
 The OpenStereo framework is ambitious, and should really help ensure that future developments are rigorously tested and compared to what came before. 
 

@@ -1,6 +1,7 @@
 ---
 id: notes
 title: 📚 Ferdi's Notes
+search: false
 #image: "https://user-images.githubusercontent.com/1483922/208359430-f55d7503-3a98-4875-a35c-16314c9439d0.png"
 metadata-files: ["_metadata.yml"]
 listing:
