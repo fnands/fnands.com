@@ -11,8 +11,8 @@ fn fill_super_minimal() -> List[UInt32]:
 
 def main():
 
-    var a = fill_super_minimal()
-    alias b = fill_super_minimal()
+    var var_table = fill_super_minimal()
+    alias alias_table = fill_super_minimal()
 
     for i in range(5):
-        print(a[i], b[i])
+        print(var_table[i], alias_table[i])
