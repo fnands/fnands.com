@@ -39,6 +39,16 @@ fn minimal_table_int8() -> List[UInt32]:
     return table
 
 
+fn fill_super_minimal() -> List[UInt32]:
+    var table = List[UInt32](capacity=5)
+
+
+    table.append(129)
+
+    for i in range(5):
+        table.append(int(table[i].cast[DType.uint8]()))
+
+    return table
 
 def main():
     var var_min_table = minimal_table()
@@ -47,7 +57,11 @@ def main():
     var var_min_table_unsigned = minimal_table_int8()
 
 
-    for i in range(0, 512):
-        print( var_min_table[i], alias_min_table[i], var_min_table_unsigned[i])
+    #for i in range(0, 512):
+    #    print( var_min_table[i], alias_min_table[i], var_min_table_unsigned[i])
 
+    var a = fill_super_minimal()
+    alias b = fill_super_minimal()
 
+    for i in range(5):
+        print(a[i], b[i])
