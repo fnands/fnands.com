@@ -259,6 +259,7 @@ fn bench() raises:
     print( len(rand_list))
 
     var baseline_crc = CRC32(rand_list)
+    print(hex(baseline_crc))
 
     var report = benchmark.run[run_32[rand_list]](max_runtime_secs=5
     ).mean(benchmark.Unit.ms)
@@ -267,6 +268,7 @@ fn bench() raises:
     alias little_endian_table_8_byte = fill_table_n_byte[8]()
 
     assert_equal(baseline_crc, CRC32_table_8_byte(rand_list, little_endian_table_8_byte))
+
 
     var report_8 = benchmark.run[run_32_table_8_byte[rand_list, little_endian_table_8_byte]](max_runtime_secs=5).mean(
         benchmark.Unit.ms

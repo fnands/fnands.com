@@ -1,25 +1,27 @@
 
 fn fill_table_2_byte() -> List[UInt32]:
-
     var table = List[UInt32](capacity=512)
-    table.size = 512
-    #table.resize(256*2, 0)
 
-    for i in range(256):
+    #table.size = 1024
+    #table.resize(512, 0)
+    for i in range(512):
 
-        var key = UInt8(i)
-        var crc32 = key.cast[DType.uint32]()
-        for _ in range(8):
-            if crc32 & 1 != 0:
-                crc32 = (crc32 >> 1) ^ 0xedb88320
-            else:
-                crc32 = crc32 >> 1
+        if i < 256: 
+            var key = UInt8(i)
+            var crc32 = key.cast[DType.uint32]()
+            for _ in range(8):
+                if crc32 & 1 != 0:
+                    crc32 = (crc32 >> 1) ^ 0xedb88320
+                else:
+                    crc32 = crc32 >> 1
 
-        table[i] = crc32
+            table.append(crc32)
 
-    for j in range(256, 512):
-        var crc32 = table[j-256]
-        table[j] = (crc32 >> 8) ^ table[int(crc32.cast[DType.uint8]())]
+    
+    #for j in range(256, 512):
+        if i >= 256: 
+            var crc32 = table[i-256]
+            table.append((crc32 >> 8) ^ table[int(crc32.cast[DType.uint8]())])
     return table
 
 
@@ -85,7 +87,10 @@ def main():
 
     var var_little_endian_table_2_byte = fill_table_2_byte()
     alias alias_little_endian_table_2_byte = fill_table_2_byte()
+    #var mat_little_endian_table_2_byte = alias_little_endian_table_2_byte
 
+    #print(len(var_little_endian_table_2_byte))
+    #print(len(alias_little_endian_table_2_byte))
 
     print(hex(CRC32(example_list, List[UInt32](1))))
     print(hex(CRC32_table_1_byte(example_list, var_little_endian_table_2_byte)))       
@@ -94,3 +99,10 @@ def main():
     print(hex(CRC32_table_2_byte(example_list, var_little_endian_table_2_byte)))
     print(hex(CRC32_table_2_byte(example_list, alias_little_endian_table_2_byte)))
 
+    for i in range(0, 256):
+        print(var_little_endian_table_2_byte[i], alias_little_endian_table_2_byte[i])
+    print("    ")
+    for i in range(256, 512):
+        print(var_little_endian_table_2_byte[i], alias_little_endian_table_2_byte[i])
+
+    #print(var_little_endian_table_2_byte.unsafe_ptr().is_aligned[64]())

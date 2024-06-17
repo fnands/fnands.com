@@ -1,6 +1,7 @@
 import benchmark
 from random import rand, seed
 from bit import bit_reverse, byte_swap
+
 from testing import assert_equal
 
 fn fill_table_n_byte[n: Int]() -> List[UInt32]:
@@ -44,6 +45,30 @@ fn CRC32(data: List[SIMD[DType.uint8, 1]]) -> SIMD[DType.uint32, 1]:
                 crc32 = crc32 << 1
                 
     return bit_reverse(crc32^0xffffffff)
+
+fn CRC32_inv(data: List[UInt8]) -> UInt32:
+    """Big endian CRC-32 check using 0xedb88320 as polynomial."""
+
+    # Initialize crc32 as all 1s
+    var crc32: UInt32 = 0xffffffff
+
+    # Step though all bytes in bytestream
+    for byte in data:
+
+        # XOR new byte with crc32
+        crc32 = (byte[].cast[DType.uint32]() ) ^ crc32
+
+        # Step though crc32 8 times
+        for _ in range(8):
+            
+            # If leading bit is 1, bitshift by 1 and XOR, otherwise just shift 
+            if crc32 & 1 != 0:
+                crc32 = (crc32 >> 1) ^ 0xedb88320
+            else:
+                crc32 = crc32 >> 1
+
+    # Invert upon return
+    return crc32^0xffffffff
 
 fn CRC32_table_8_byte(borrowed data: List[SIMD[DType.uint8, 1]], table: List[UInt32]) -> SIMD[DType.uint32, 1]:
     var crc32: UInt32 = 0xFFFFFFFF
@@ -502,7 +527,8 @@ fn CRC32_table_8_byte2(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt3
         val[0] = crc32 ^ val[0]
         var index: SIMD[DType.uint8, 8]
 
-        index = bitcast[DType.uint8, 8](byte_swap(val))
+        index = bitcast[DType.uint8, 8](byte_swap
+(val))
 
         crc32 = 0
         @parameter
@@ -601,6 +627,9 @@ fn run_32[data: List[SIMD[DType.uint8, 1]] ]():
     var a =  CRC32(data)
     benchmark.keep(a)
 
+fn run_32_inv[data: List[SIMD[DType.uint8, 1]] ]():
+    var a =  CRC32_inv(data)
+    benchmark.keep(a)
 
 fn run_32_table_8_byte[data: List[SIMD[DType.uint8, 1]], table: List[UInt32]]():
     var a = CRC32_table_8_byte(data, table)
@@ -661,11 +690,14 @@ fn bench() raises:
     ).mean(benchmark.Unit.ms)
     print("Baseline: \t", report)
 
+    var inv_crc = CRC32_inv(rand_list)
+    print(hex(inv_crc))
+
     alias little_endian_table_8_byte = fill_table_n_byte[8]()
     print(hex(CRC32_table_8_byte(rand_list, little_endian_table_8_byte)))
 
 
-    #assert_equal(baseline_crc, CRC32_table_8_byte(rand_list, little_endian_table_8_byte))
+    assert_equal(baseline_crc, CRC32_table_8_byte(rand_list, little_endian_table_8_byte))
 
     var report_8 = benchmark.run[run_32_table_8_byte[rand_list, little_endian_table_8_byte]](max_runtime_secs=0.5).mean(
         benchmark.Unit.ms
