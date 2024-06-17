@@ -1,8 +1,8 @@
 fn fill_super_minimal() -> List[UInt32]:
     var table = List[UInt32](capacity=2)
 
-    table.append(129)
-    table.append(int(table[0].cast[DType.uint8]()))
+    table.append(32767)
+    table.append(int(table[0].cast[DType.uint16]()))
 
     #var a: UInt32 = 129
     #table.append(int(a.cast[DType.uint8]()))
