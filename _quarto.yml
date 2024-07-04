@@ -17,6 +17,8 @@ website:
     #  file: talks.qmd
     - text: Notes
       file: notes/index.qmd
+    - text: Talks
+      file: talks/index.qmd
     right:
       - about.qmd
       - icon: github

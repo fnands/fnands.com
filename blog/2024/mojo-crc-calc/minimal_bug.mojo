@@ -15,8 +15,8 @@ fn minimal_table() -> List[UInt32]:
     
         if i >= 256: 
             var crc32 = table[i-256]
-            var index = crc32.cast[DType.uint8]()
-            table.append(table[int(index)])
+            var idx = int(crc32.cast[DType.uint8]())
+            table.append(table[idx])
     return table
 
 fn minimal_table_int8() -> List[UInt32]:
@@ -34,8 +34,8 @@ fn minimal_table_int8() -> List[UInt32]:
     
         if i >= 256: 
             var crc32 = table[i-256]
-            var index = crc32.cast[DType.int8]()
-            table.append(table[int(index)])
+            var idx = int(crc32.cast[DType.int8]())
+            table.append(table[idx])
     return table
 
 
@@ -57,11 +57,11 @@ def main():
     var var_min_table_unsigned = minimal_table_int8()
 
 
-    #for i in range(0, 512):
-    #    print( var_min_table[i], alias_min_table[i], var_min_table_unsigned[i])
+    for i in range(0, 512):
+        print( var_min_table[i], alias_min_table[i], var_min_table_unsigned[i])
 
-    var a = fill_super_minimal()
-    alias b = fill_super_minimal()
+    #var a = fill_super_minimal()
+    #alias b = fill_super_minimal()
 
-    for i in range(5):
-        print(a[i], b[i])
+    #for i in range(5):
+    #    print(a[i], b[i])
