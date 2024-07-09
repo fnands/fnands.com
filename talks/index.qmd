@@ -7,4 +7,4 @@
 
 ## 2024
 
-PyConDE 2024 [video (comong soon)](/url/goes/here)  [slides](https://docs.google.com/presentation/d/e/2PACX-1vTSu6KcRNr-HkQ12bBQZjUFcimrSR0jV2sU2VYVCEwjqCVnLGSkKurLQ5v8QUeKNt4IaZ-UblQV4dV-/pub)
+PyConDE 2024 [video (coming soon)](/url/goes/here)  [slides](https://docs.google.com/presentation/d/e/2PACX-1vTSu6KcRNr-HkQ12bBQZjUFcimrSR0jV2sU2VYVCEwjqCVnLGSkKurLQ5v8QUeKNt4IaZ-UblQV4dV-/pub)
