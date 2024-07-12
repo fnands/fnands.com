@@ -5,7 +5,7 @@ website:
   title: "fnands"
   site-url: https://fnands.com
   description: "My personal site"
-  favicon: "assets/f_logo.webp"
+  favicon: "assets/f_favicon.webp"
   navbar:
     left:
     # 🏠 📮 👨🏽‍💻 🍎 🎤 📚
