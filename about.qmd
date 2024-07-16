@@ -1,6 +1,6 @@
 ---
 title: "About"
-image: assets/f_logo.webp
+image: assets/f_favicon.webp
 about:
   template: jolla
   links:
