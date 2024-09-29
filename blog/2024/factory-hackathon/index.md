@@ -17,5 +17,5 @@ The trip to Kruger National Park was more than just a vacation; it was a journey
 
 So, if you ever find yourself pondering a trip to Kruger National Park, take the plunge. Embrace the wild, for it is an adventure that will leave you richer in ways you can't even imagine.
 
-<video src="https://github.com/user-attachments/assets/79528d67-0255-45f8-9056-191e63f181c3" controls="controls" style="max-width: 730px;"> </video>
+<video src="https://github.com/user-attachments/assets/79528d67-0255-45f8-9056-191e63f181c3" controls="controls" width="100%"> </video>
 
