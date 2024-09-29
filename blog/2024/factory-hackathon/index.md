@@ -15,3 +15,6 @@ Yet, the highlight of our trip was undoubtedly the sunrise hike. Guided by the p
 The trip to Kruger National Park was more than just a vacation; it was a journey of discovery, laughter, and a deep appreciation for the natural world. It was a reminder that in the grand scheme of things, we are but tiny specks in a vast, interconnected web of life. And as I look back on those memories, I am filled with gratitude – for the experiences, the friendships, and the wild, unpredictable beauty of nature.
 
 So, if you ever find yourself pondering a trip to Kruger National Park, take the plunge. Embrace the wild, for it is an adventure that will leave you richer in ways you can't even imagine.
+
+
+<video src="7b220e34-348c-4f2d-9e80-d998076c7aa4.mp4" width="1360" height="752" controls></video>
