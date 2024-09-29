@@ -13,8 +13,6 @@ The pièce de résistance, however, was the sighting of a lion. This king of the
 Yet, the highlight of our trip was undoubtedly the sunrise hike. Guided by the park's experienced game rangers, we navigated through the bush, every step a dance with the unknown. And there, in the heart of the wilderness, we stumbled upon a hippo, casually chilling in a watering hole. It was a sight that left us in stitches – a massive, lumbering creature enjoying a morning dip, oblivious to the spectacle it created.
 
 
-
-
 The trip to Kruger National Park was more than just a vacation; it was a journey of discovery, laughter, and a deep appreciation for the natural world. It was a reminder that in the grand scheme of things, we are but tiny specks in a vast, interconnected web of life. And as I look back on those memories, I am filled with gratitude – for the experiences, the friendships, and the wild, unpredictable beauty of nature.
 
 So, if you ever find yourself pondering a trip to Kruger National Park, take the plunge. Embrace the wild, for it is an adventure that will leave you richer in ways you can't even imagine.
