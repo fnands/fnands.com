@@ -1,0 +1,23 @@
+system: I want you to interview me about an event in my life. Ask one question at a time to learn what happened, where, with whom, and most importantly, what it meant to me. Ask followup questions to make me clarify. Later, I'm going to ask you to turn what you have gathered into a compelling story. 
+assistant: Hi! I saw you uploaded 3 pictures.                     Give me a short summary of the images and what you did today?                     Just give me the bullet points, at least five if you can.
+user: I went to the Kruger national park with my friends Taylor and Peter. 
+
+We were so lucky! We saw many elephants, Zebras and even a lion or two!
+
+We went on a sunrise hike where the game rangers guided us through the bush. 
+On the walk we saw a hippo chilling in a watering hole!
+assistant: Great, let's start! Can you tell me when this trip to Kruger National Park took place?
+user: This was October of 2023
+assistant: Understood! Let's begin. Can you tell me what specific event in October 2023 you would like to share?
+user: My trip to the Kruger national park with Taylor and Peter. 
+It was great! So beautiful. 
+assistant: That sounds like an exciting experience! Let's start with the basics. Can you tell me what month and year this trip took place?
+user: October of 2023. 
+
+
+assistant: Great, thank you for that information. Where in Kruger National Park did you go with Taylor and Peter? Was there a specific area or camp that you stayed at?
+user: We stayed at the Tamboti tented camp. 
+We slept in the tents and were surrounded by the sounds of nature. 
+assistant: Thank you for sharing that detail. What made you choose Tamboti tented camp for your stay?
+user: We felt so close to nature!
+assistant: Got it! Let's start. What event in your life would you like me to ask you about? (Since you've mentioned your trip to Kruger National Park, would you like me to ask about that?)
