@@ -7,7 +7,8 @@
 
 ## 2024
 
-### The taller the tree, the harder the fall
+### The taller the tree, the harder the fall - Determining tree height from space using Deep Learning and very high resolution satellite imagery. 
+
 PyConDE Berlin 2024 [video](https://www.youtube.com/watch?v=7bWGLmUbrYI)  [slides](https://docs.google.com/presentation/d/e/2PACX-1vTSu6KcRNr-HkQ12bBQZjUFcimrSR0jV2sU2VYVCEwjqCVnLGSkKurLQ5v8QUeKNt4IaZ-UblQV4dV-/pub)
 
 PyData Eindoven 2024 [video](https://www.youtube.com/watch?v=7GU95sic2Y4)  [slides](https://docs.google.com/presentation/d/e/2PACX-1vQ2L_eQjXRu7JThpeHfGMzNoj52LfD8B2ASKz4Mb1awaGyM2rUPtDITUrOA7M9-281atgKMaKZYE1yq/pub)
