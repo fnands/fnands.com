@@ -38,6 +38,7 @@ The writer will then be given the transcript of your conversation, as well as Pi
 We had a little bit of time left at the end so we ended up also adding a section where we fed a summary of your post to LumaAI's Dream Machine model, which generates a five second video based on this input. 
 <video src="https://github.com/user-attachments/assets/42943e30-7969-449a-bfaf-b60d463b4e3e" controls="controls" width="100%"> </video>
 
+https://github.com/user-attachments/assets/42943e30-7969-449a-bfaf-b60d463b4e3e
 
 
 ##
