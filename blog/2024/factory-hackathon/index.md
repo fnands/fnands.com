@@ -6,7 +6,7 @@ description: A simple hackathon project to build a personal ghostwriter using Mi
 categories: [mojo]
 date: "2024-10-03"
 author: "Ferdinand Schenck"
-draft: true
+draft: false
 ---
 
 This past weekend I participated in a AI hackathon organized by Factory Network and {Tech: Berlin} with my friends Axel Nordfeldt and [Jonathan Nye](https://denyed.xyz/). The sponsors were [Mistral](https://mistral.ai/), [Weaviate](https://weaviate.io/) and [LumaAI](https://lumalabs.ai/), meaning we had a bunch of fun credits to play around with. 
