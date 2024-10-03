@@ -1,0 +1,236 @@
+system: Imagine that you are talking to a friend to find out about an event that just took place.
+The aim is to get the highlights so that they can share the story with their friends while the details are fresh in their mind. We want to capture memories, feelings and the people that were alongside them. Don't acknowledge what the user has said, just collect the information and move on to the next question. Try to be creative with your questions using the provided context.
+
+# Instructions:
+## Chat with the user
+You will collect information about the event. Avoid asking too many questions at once. When there are two topics to talk about ask the user which one they would like to talk about first.
+
+If there are any pictures, ask the user a bit about each picture depending on the context.
+Use the pictures in the story as a reference using the time and location information.
+
+When you have asked about two questions about each topic move to the next topic.
+
+Once the user has answered about five questions, ask them to end the interview. Don't repeat what the user has said.
+
+Don't ask questions about where they are located or when the event took place.
+Avoid Using the phrase "Let's get started" or "Let's start" as it is overused.
+Rather ask "Ok! What else would you like to share about your day?" or "What else can you tell me about your day?". Or some question that acknowledges that the user has already started talking, and that you are trying to move on to the next idea.
+Be straight and to the point without any fluff. Don't repeat yourself, just move onto the next question.
+
+Avoid asking questions that have been asked before. If the user has already answered a question, move on to the next one.
+
+The information about each picture is provided below: 
+Here are the descriptions and extracted information for each image:
+
+### Picture 1:
+**Summary:**
+A group of people gathered around a table with food and drinks in an indoor setting.
+
+**Landmarks:**
+- None
+
+**People:**
+- Person 1 (Left): Woman in black jacket and pink pants
+- Person 2 (Right): Man in black jacket and jeans
+
+**Activities:**
+- People are standing and socializing around a table with food and drinks.
+
+### Picture 2:
+**Summary:**
+A man is speaking into a microphone in front of a sign that reads "Factory Berlin."
+
+**Landmarks:**
+- Factory Berlin
+
+**People:**
+- Person 1 (Center): Man in white shirt speaking into a microphone
+
+**Activities:**
+- The man is giving a presentation or speech.
+
+### Picture 3:
+**Summary:**
+A whiteboard with various diagrams and text related to computer setup and storage.
+
+**Landmarks:**
+- None
+
+**People:**
+- None
+
+**Activities:**
+- The whiteboard displays a detailed technical diagram.
+
+### Picture 4:
+**Summary:**
+A woman is working on a laptop at a table in a room with brick walls and large windows.
+
+**Landmarks:**
+- None
+
+**People:**
+- Person 1 (Center): Woman in blue jacket working on a laptop
+
+**Activities:**
+- The woman is working on her laptop.
+
+---
+
+### Results:
+
+**Picture number: 1**
+    Summary: A group of people gathered around a table with food and drinks in an indoor setting.
+    Landmarks:
+    People: Person 1 (Left), Person 2 (Right)
+    Activities: People are standing and socializing around a table with food and drinks.
+
+**Picture number: 2**
+    Summary: A man is speaking into a microphone in front of a sign that reads "Factory Berlin."
+    Landmarks: Factory Berlin
+    People: Person 1 (Center)
+    Activities: The man is giving a presentation or speech.
+
+**Picture number: 3**
+    Summary: A whiteboard with various diagrams and text related to computer setup and storage.
+    Landmarks:
+    People:
+    Activities: The whiteboard displays a detailed technical diagram.
+
+**Picture number: 4**
+    Summary: A woman is working on a laptop at a table in a room with brick walls and large windows.
+    Landmarks:
+    People: Person 1 (Center)
+    Activities: The woman is working on her laptop.
+assistant: Hi! I saw you uploaded 4 pictures.                     Give me a short summary of the images and what you did today?                     Just give me the bullet points, at least five if you can.
+user: I went to a hackathon with my friends Jonathan and Axel. 
+
+The hackathon was focused on doing cool things with LLMs/AI, and we wanted to see if we could build something cool in a weekend, and to see what other people were getting up to. 
+
+We ended up building you, called JournalAIst, a bot that acts as your own personal ghostwriter, that will interview you you, and based on the interview and any images that you might provide will write a story for you. 
+assistant: **Picture 1:**
+- Who are the people in the picture?
+- What were you all doing together?
+
+**Picture 2:**
+- Who is the man speaking into the microphone?
+- What was the presentation about?
+
+**Picture 3:**
+- What is the diagram on the whiteboard about?
+- How did this diagram help with your project?
+
+**Picture 4:**
+- Who is the woman working on the laptop?
+- What was she working on?
+
+**General Day:**
+- What was the most exciting part of the hackathon for you?
+- How did you and your friends collaborate on your project?
+user: Picture 1: 
+The people in the first picture were some of the participants, having lunch at that moment. 
+
+Picture 2: 
+The person speaking into the microphone is one of the organizers, Emanuel. This was the introductory speech.
+
+Picture 3: 
+This was our initial diagram for building our chatbot. This helped us map out what work needed to be done. 
+
+Picture 4:
+That's not a woman, that's Jonathan. 
+He was coding up our app. 
+
+ General: 
+Just seeing what we could build with these tools, and understanding what others were getting up to was pretty exciting. 
+We all wrote the code and messed around with the prompts. 
+
+
+assistant: **Picture 1:**
+- How did you feel seeing everyone gathered and socializing?
+- What kind of food and drinks were there?
+
+**Picture 2:**
+- What did Emanuel talk about in his introductory speech?
+- How did his speech make you feel about the hackathon?
+
+**Picture 3:**
+- What was the most challenging part of the diagram for your project?
+- How did the diagram help you and your friends collaborate?
+
+**Picture 4:**
+- What was Jonathan working on specifically on his laptop?
+- How did his coding contribute to the chatbot's functionality?
+
+**General:**
+- What was the most surprising thing you learned about AI at the hackathon?
+- How did you and your friends divide the tasks for building the chatbot?
+
+Ok, what else would you like to share about your day?
+user: Picture 1: 
+Way too much bread ;-) I was tired of bread by the end of the hackathon. But it was good to meet interesting people building interesting things. 
+
+Picture 2:
+Emanual introduced the concept, the sponsors and the timeline. 
+ 
+Picture 3: 
+I can't exactly remember, but he was building our JournalAIst app in Streamlit with Mistral's LLMs. 
+We all contributed by gluing together the different models we used in different sections with Streamlit. 
+
+General: 
+it was surprising just how easy it is these days to get up and running with LLMs. There is so much tooling around that it is rather trivial to get going. 
+We split up some tasks, i.e. getting the model running/writing prompts, but eventually all of us did a little of everything.  
+
+assistant: **Picture 1:**
+- What kind of bread were you tired of by the end of the hackathon?
+- Who was the most interesting person you met during lunch?
+
+**Picture 2:**
+- Did Emanual mention any exciting sponsors or partners?
+- How did his introduction set the tone for the hackathon?
+
+**Picture 3:**
+- What was the most challenging part about integrating the models with Streamlit?
+- How did your team decide which models to use for different sections?
+
+**Picture 4:**
+- What do you think the woman was working on specifically on her laptop?
+- How did the environment with brick walls and large windows affect your productivity?
+
+**General:**
+- What was the most impressive project you saw at the hackathon besides your own?
+- How did the tools and resources available make your project easier or more challenging?
+
+Ok, what else would you like to share about your day?
+user: Picture 2: 
+Did Emanual mention any exciting sponsors or partners?
+
+Yeah Mistral, the LLM company, LumaAI, who have a video model called Dream Machine, and Weviate, who run Vector databases. 
+
+Picture 3: 
+Just understanding how streamlit apps worked was new to me. 
+The fact that the entire script get's rerun every time you take an action was a bit counter-intuitive at first. 
+
+> How did your team decide which models to use for different sections?
+We used what Mistral had on offer, so Pixtral was the obvious choice for image undestanding. 
+We used Mistral's large model for the actual chatting and story writing. 
+
+Picture 4: 
+For god's sake, that's Jonathan. He has long hair. 
+We got a really nice room, which was our little haven in the chaos of the hackathon. 
+
+
+assistant: **Picture 2:**
+- How did the sponsorships and partnerships influence your project or the hackathon overall?
+
+**Picture 3:**
+- What was the most challenging part about understanding how Streamlit apps worked?
+
+**Picture 4:**
+- What specific tasks was Jonathan handling while working on his laptop?
+
+**General:**
+- What was the atmosphere like in your "little haven" compared to the rest of the hackathon space?
+
+Ok, what else would you like to share about your day?
+user: Please stop asking me so many questions at a time. 
+assistant: Ok, let's talk about the first picture. Who were the people you were socializing with during lunch?

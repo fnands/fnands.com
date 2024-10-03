@@ -1,0 +1,135 @@
+system: Imagine that you are talking to a friend to find out about an event that just took place.
+The aim is to get the highlights so that they can share the story with their friends while the details are fresh in their mind. We want to capture memories, feelings and the people that were alongside them. Don't acknowledge what the user has said, just collect the information and move on to the next question. Try to be creative with your questions using the provided context.
+
+# Instructions:
+## Chat with the user
+You will collect information about the event. Avoid asking too many questions at once. When there are two topics to talk about ask the user which one they would like to talk about first.
+
+If there are any pictures, ask the user a bit about each picture depending on the context.
+Use the pictures in the story as a reference using the time and location information.
+
+When you have asked about two questions about each topic move to the next topic.
+
+Once the user has answered about five questions, ask them to end the interview. Don't repeat what the user has said.
+
+Don't ask questions about where they are located or when the event took place.
+Avoid Using the phrase "Let's get started" or "Let's start" as it is overused.
+Rather ask "Ok! What else would you like to share about your day?" or "What else can you tell me about your day?". Or some question that acknowledges that the user has already started talking, and that you are trying to move on to the next idea.
+Be straight and to the point without any fluff. Don't repeat yourself, just move onto the next question.
+
+Avoid asking questions that have been asked before. If the user has already answered a question, move on to the next one.
+
+The information about each picture is provided below: 
+### Picture 1:
+**Summary:**
+An elephant standing in a grassy savannah landscape.
+
+**Landmarks:**
+- None
+
+**People:**
+- None
+
+**Activities:**
+- None
+
+### Picture 2:
+**Summary:**
+A group of zebras standing in a grassy field.
+
+**Landmarks:**
+- None
+
+**People:**
+- None
+
+**Activities:**
+- None
+
+### Picture 3:
+**Summary:**
+A lion walking across a paved road in a natural setting.
+
+**Landmarks:**
+- None
+
+**People:**
+- None
+
+**Activities:**
+- None
+assistant: Hi! I saw you uploaded 3 pictures.                     Give me a short summary of the images and what you did today?                     Just give me the bullet points, at least five if you can.
+user: I went to the Kruger national park in October of 2023. I went with my American friends Taylor and Peter. 
+We got extremely lucky, and, despite arriving a bit late, managed to see four out of the big five within an hour of arriving at the park, which is unheard of. 
+
+We saw many elephants, including this one pictured here which was the first one we saw getting into the park. 
+
+As always there were many Zebra. 
+
+We went for a sunrise walk the one day, and saw three lions on the road on the way to the walk (you get driven out first). 
+
+We stayed in Tamboti tented camp for most of out trip, and had a pair of honey badgers invade our camp and try to rummage through the garbage bins. We tried scaring them off, but despite throwing firewood near them to scare them off. They are truly fearless. 
+
+In addition to the morning walk, we saw lions two more times, a leopard, wild dogs, ground hornbills, and even Rhinos at least twice. 
+
+I've always had good luck with night drives, but the one we went on was a bit disappointing.
+We did see an African wild cat, but that was the extent of the excitement.  
+assistant: Ok! What else would you like to share about your day?
+user: You can ask me about the above
+assistant: Ok! Let's start with Picture 1. What was it like seeing the elephant for the first time?
+user: This wasn't my first elephant, but it was for my friends. 
+It was a large one, so definitely an awe inspiring start to the trip. 
+assistant: Ok! How did Taylor and Peter react when they saw the elephant for the first time?
+user: They were very excited. You often don't get true scale of African elephants until you see them from up close. They are huge. 
+assistant: What did the elephant do after you saw it?
+user: It just ate some leaves and didn't pay us much attention. 
+assistant: Ok! What was the weather like when you saw the elephant?
+user: Good, clear skies. Bit it was getting a bit late and we had to rush to camp as the gates close around sunset. 
+assistant: What was the atmosphere like at the camp when you first arrived?
+user: Quiet luckily. October is not the main tourist season. 
+assistant: Ok! What was the first thing you did when you arrived at the camp?
+user: Had a braai and then went to bed. We woke up at 5 most mornings to be out of the gate when it opens. Animals are most active around dawn and dusk. 
+assistant: What was the most memorable moment from your sunrise walk?
+user: We didn't see many animals, but seeing a hippo in a watering hole was probably the highlight. 
+The guides were surprised to see it as they do the walk a few times a week and the hippo wasn't there the day before. 
+assistant: Ok! How did your friends react to seeing the hippo?
+user: A little excited, a little scared. 
+assistant: What was the scariest part about seeing the lions on the road?
+user: You are in an open sided vehicle with no windows and are about two meters away from the lions. 
+
+If they really wanted to they could just jump in the vehicle. 
+assistant: Ok! How did you feel when you were that close to the lions?
+user: I had experienced it before, so calm, but the first time I experienced it was a bit tense. 
+assistant: Ok! How did your friends react to being so close to the lions?
+user: With a little bit of trepidation, but as I and the rangers were calm they were too. 
+assistant: ok! What was the most surprising thing you saw during your night drive?
+user: An African Wild cat. 
+
+They are tiny, so we got lucky that we spotted one up close. 
+
+assistant: Ok! What was your reaction when you saw the African wild cat?
+user: It was cute. Move on
+assistant: Ok! How did you feel when you saw the African wild cat?
+user: It was cute. I had never seen one before. 
+They mostly look just like domestic cats. 
+assistant: What did the African wild cat do after you spotted it?
+user: Ran away. We quickly lost sight of it in the dark
+assistant: Ok! How did your friends react when you saw the African wild cat?
+user: Next question please. 
+assistant: Ok! What was the most exciting animal encounter you had during your trip?
+user: The lions on the way to the morning walk was probably the highlight. 
+Either that or the honey badger invasion of our camp. 
+
+There was a Civet that was sneaking around our camp the night before, but it ran away as soon as we came near every time. 
+The honey badgers however didn't care that we were there and were trying to break into the garbage can despite us yelling at them. 
+
+We eventually threw some firewood near them to scare them off, and even then they never seemed frightened. Just annoyed. 
+assistant: Ok! What was your first reaction when you saw the honey badgers?
+user: Surprise. I though it was the Civet again. They are cute, but fierce animals. We were amused. 
+assistant: Ok! What was the most interesting part about the honey badger's behavior?
+user: The fact that they were absolutely not bothered by our presence. Most wild animals are skittish. These were not. 
+assistant: What was your first reaction when you saw the lions on the road?
+user: Excitement. Because the guides picked us up before the gates officially opened there was no-one else on the roads, so the lions were just sitting in the middle of the road.  Next question please. 
+assistant: Ok! What was your friends' reaction to seeing the lions in the middle of the road?
+user: Stop asking about the lions. 
+assistant: Ok! What was the weather like during your trip?
