@@ -3,7 +3,7 @@ layout: post
 title: Building your own personal ghostwriter
 subtitle: "\n"
 description: A simple hackathon project to build a personal ghostwriter using Mistral's API. 
-categories: [mojo]
+categories: [llms]
 date: "2024-10-03"
 author: "Ferdinand Schenck"
 draft: false
