@@ -67,7 +67,7 @@ I tried giving it another go (caveat, this one was generated after the free cred
 
 [Blog Post: Kruger Story 2](kruger-adventure2/kruger-adventure2.md)
 
-Again, the story is reasonable, although I wished it was maybe a bit longer? Or maybe it is mercifully short.
+Again, the story is reasonable, although I wished it was maybe a bit longer? Or maybe it is mercifully short, depending on your perspective. 
 
 ### Story 3: A Weekend of Wonders: Our Hackathon Adventure
 
@@ -95,7 +95,7 @@ The quality of the interviewer questions could also be better. Maybe we can prom
 
 ## Code
 
-After the hackathon the API keys provided expired, but mistral recently opened up a [free tier](https://mistral.ai/news/september-24-release/), so we bumped the main model down to one of the smaller ones supported on the free tier. 
+After the hackathon the API keys provided expired, but Mistral recently opened up a [free tier](https://mistral.ai/news/september-24-release/), so we bumped the main model down to one of the smaller ones supported on the free tier. 
 
 In any case, the code is [here](https://github.com/nyejon/journalaist) if you wish to play around with it. The code is what I would call "Hackathon Quality" so beware. You'll need a Mistral API key to run it, but it will work with the free tier, so won't cost you anything. 
 
