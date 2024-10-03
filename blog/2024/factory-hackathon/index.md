@@ -27,7 +27,7 @@ What isn't that hard however is telling someone about my experiences, especially
 
 For the two-day hackathon we had access to the sponsors' APIs. We especially wanted to play around with Mistral's API, which had just recently added a new multi-modal model, [Pixtral](https://mistral.ai/news/pixtral-12b/) that can understand images as well as text. 
 
-So we basically built the app using Streamlit (called JournalAIst) as two parts: an interviewer and a writer. Basically we had a chat loop in which you could upload images (interpreted by Pixtral) and during which the interviewer model would ask you questions about your experience and the images that you added. After answering the interviewers questions for a while, you can choose to end the conversation, after which you are sent to the writer. 
+So we basically built the app using Streamlit (called JournalAIst) as two parts: an interviewer and a writer. Basically we had a chat loop in which you could upload images (interpreted by Pixtral) and during which the interviewer model (`mistral-large-2407`) would ask you questions about your experience and the images that you added. After answering the interviewers questions for a while, you can choose to end the conversation, after which you are sent to the writer. 
 
 ![Interviewer](interviewer_interface.png)
 
@@ -52,23 +52,52 @@ We made the story writer output the story it writes as markdown so they can easi
 
 ## A few sample stories. 
 
-In case you were wondering, no I din't use JournalAIst to write this blog post. The language is clearly not flowery enough. To give you an idea of the quality of the writing, here are a few samples:
+In case you were wondering, no I didn't use JournalAIst to write this blog post. The language is clearly not flowery enough. To give you an idea of the quality of the writing, here are a few samples:
 
 ### Story 1: A Wild Rendezvous in Kruger National Park
-I recounted my experience of being in the [Kruger National Park](https://en.wikipedia.org/wiki/Kruger_National_Park) with a couple of friends last year. For this case I basically just threw in a handful of details and sent the model off to write. See the video at the end that we created while the LumaAI credits were still good. 
+I recounted my experience of being in the [Kruger National Park](https://en.wikipedia.org/wiki/Kruger_National_Park) with a couple of friends last year. For this case I basically just threw in a [handful of details](kruger-adventure/conversation_history.txt) and sent the model off to write. See the video at the end that we created while the LumaAI credits were still good. The video seems to try and combine a Lion, Elephant and Zebra, with the Elephant getting the Elephant's share of the mix. Also, note the abomination in the background.  
 
-[Kruger Story 1](kruger-adventure/kruger-adventure.md)
+[Blog Post: Kruger Story 1](kruger-adventure/kruger-adventure.md)
 
-
+Despite the minimal details, it did summarise what I told it quite truthfully, but with a healthy dash of breathless wonder, which doesn't sound like me. This might be as the prompt was write in the style of Bill Bryson, but even there I wouldn't say it sounds a lot like him either. The prompt also requests the model to write in a "humorous and engaging" manner, so I guess that might be the reason it sounds as it does. 
 
 ### Story 2: A Wild Ride through Kruger: A Tale of Elephants, Lions, and Fearless Honey Badgers
 
-[Kruger Story 2](kruger-adventure2/kruger-adventure2.md)
+I tried giving it another go (caveat, this one was generated after the free credits expired, so we switched the model to `mistral-small-2409`), but this time added [more context](kruger-adventure2/conversation_history.txt) and chatted for a bit longer. 
+
+[Blog Post: Kruger Story 2](kruger-adventure2/kruger-adventure2.md)
+
+Again, the story is reasonable, although I wished it was maybe a bit longer? Or maybe it is mercifully short.
 
 ### Story 3: A Weekend of Wonders: Our Hackathon Adventure
 
+I also asked it to write up my experience of the hackathon with a few pictures I took during the event. I tried to continue the [interview for a while](hackathon-story/conversation_history.txt) to give as much info as possible. 
 
-[Hackathon Story](hackathon-story/hackathon-story.md)
+[Journal Entry: Hackathon Story](hackathon-story/hackathon-story.md)
+
+The story is OK. Everything it stated was factual, and as the prompt this time was to write a journal entry and not a blog post, it's not as fantastical as before. It's a little short though, and I could likely have written the same if not more myself. 
 
 
-We ended up making it to the final six teams with our project, which was a pretty cool experience.
+## Conclusions
+
+Our project was one of the few that actually fully worked by the end of the hackathon, and our first showing really impressed the judges (they told me afterwards). On the strength of that we made it to the final six teams (out of about 25 that decided to enter). The pitch went fine, and we again did a live demo in the four minutes alloted to us. We didn't end up winning any prizes, but we were just happy to be in the finals. Maybe we needed a salesperson on our team and not just a bunch of engineers 😉. 
+
+I spoke to some of the judges afterwards, and one of the criticisms was that while initially impressive, they had worries about hallucinations: we highlighted that this is a way to hopefully tell an authentic and meaningful story, but with hallucinations, you might spend as much time fixing the story as you do talking to the model, which is extremely fair and was also our worry. It did seem the longer you chatted to it the more factual the story ended up being (unsurprisingly), but at what point do you spend more time chatting then it would just have taken you to write it? 
+
+On the last point: I would still argue that the job of a ghostwriter is to take your unstructured thoughts and edit them down into something coherent. 
+
+My feeling is that the chat interface, or at least typing is not as free as I would have liked. One of the judges suggested a voice interface, which is something we considered as well (i.e. using something like [Whisper](https://github.com/openai/whisper) to turn speech into text), but would have been hard to get working in the little time we had. 
+
+
+My feeling is that there is something interesting here, and that making the interaction with the interviewer more natural is probably where we should focus our efforts. 
+
+The quality of the interviewer questions could also be better. Maybe we can prompt it by giving it some transcripts of interviews by Louis Theroux or some other good interviewer. 
+
+## Code
+
+After the hackathon the API keys provided expired, but mistral recently opened up a [free tier](https://mistral.ai/news/september-24-release/), so we bumped the main model down to one of the smaller ones supported on the free tier. 
+
+In any case, the code is [here](https://github.com/nyejon/journalaist) if you wish to play around with it. The code is what I would call "Hackathon Quality" so beware. You'll need a Mistral API key to run it, but it will work with the free tier, so won't cost you anything. 
+
+It's also deployed on [Streamlit cloud](https://journalaist.streamlit.app/), which might work depending on whether or not we've hit the limits of Mistral's free tier. 
+

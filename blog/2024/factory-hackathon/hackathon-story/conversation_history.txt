@@ -20,217 +20,117 @@ Be straight and to the point without any fluff. Don't repeat yourself, just move
 Avoid asking questions that have been asked before. If the user has already answered a question, move on to the next one.
 
 The information about each picture is provided below: 
-Here are the descriptions and extracted information for each image:
+### Picture Descriptions and Details:
 
-### Picture 1:
+#### Picture 1:
 **Summary:**
-A group of people gathered around a table with food and drinks in an indoor setting.
+A group of people gathered around a table with food and drinks, seemingly engaged in a social event or meeting.
 
 **Landmarks:**
-- None
+- None identified.
 
 **People:**
-- Person 1 (Left): Woman in black jacket and pink pants
-- Person 2 (Right): Man in black jacket and jeans
+- Person 1 (Left): A person in a black jacket and purple pants.
+- Person 2 (Right): A person in a blue shirt.
 
 **Activities:**
-- People are standing and socializing around a table with food and drinks.
-
-### Picture 2:
-**Summary:**
-A man is speaking into a microphone in front of a sign that reads "Factory Berlin."
-
-**Landmarks:**
-- Factory Berlin
-
-**People:**
-- Person 1 (Center): Man in white shirt speaking into a microphone
-
-**Activities:**
-- The man is giving a presentation or speech.
-
-### Picture 3:
-**Summary:**
-A whiteboard with various diagrams and text related to computer setup and storage.
-
-**Landmarks:**
-- None
-
-**People:**
-- None
-
-**Activities:**
-- The whiteboard displays a detailed technical diagram.
-
-### Picture 4:
-**Summary:**
-A woman is working on a laptop at a table in a room with brick walls and large windows.
-
-**Landmarks:**
-- None
-
-**People:**
-- Person 1 (Center): Woman in blue jacket working on a laptop
-
-**Activities:**
-- The woman is working on her laptop.
+- Socializing and eating.
 
 ---
 
-### Results:
+#### Picture 2:
+**Summary:**
+A man stands in front of a screen displaying "Factory Berlin" while speaking into a microphone, with a group of people listening.
 
-**Picture number: 1**
-    Summary: A group of people gathered around a table with food and drinks in an indoor setting.
-    Landmarks:
-    People: Person 1 (Left), Person 2 (Right)
-    Activities: People are standing and socializing around a table with food and drinks.
+**Landmarks:**
+- Factory Berlin.
 
-**Picture number: 2**
-    Summary: A man is speaking into a microphone in front of a sign that reads "Factory Berlin."
-    Landmarks: Factory Berlin
-    People: Person 1 (Center)
-    Activities: The man is giving a presentation or speech.
+**People:**
+- Person 1 (Speaker): A man in a light-colored shirt and dark pants.
+- Person 2: A person in a dark jacket and jeans.
 
-**Picture number: 3**
-    Summary: A whiteboard with various diagrams and text related to computer setup and storage.
-    Landmarks:
-    People:
-    Activities: The whiteboard displays a detailed technical diagram.
+**Activities:**
+- Presentation or speech.
 
-**Picture number: 4**
-    Summary: A woman is working on a laptop at a table in a room with brick walls and large windows.
-    Landmarks:
-    People: Person 1 (Center)
-    Activities: The woman is working on her laptop.
+---
+
+#### Picture 3:
+**Summary:**
+A whiteboard with handwritten notes and diagrams, likely representing a brainstorming or planning session.
+
+**Landmarks:**
+- None identified.
+
+**People:**
+- Not applicable (no people visible).
+
+**Activities:**
+- Brainstorming or planning.
+
+---
+
+#### Picture 4:
+**Summary:**
+A woman works on a laptop at a table in a co-working space with brick walls and wooden benches.
+
+**Landmarks:**
+- None identified.
+
+**People:**
+- Person 1: A woman in a blue sweater.
+
+**Activities:**
+- Working on a laptop.
+
+---
+
+### Summary:
+
+These images depict various activities and settings within what appears to be a co-working space or a community event space. The first image shows a social gathering, the second a presentation, the third a brainstorming session, and the fourth an individual working in a co-working environment.
 assistant: Hi! I saw you uploaded 4 pictures.                     Give me a short summary of the images and what you did today?                     Just give me the bullet points, at least five if you can.
-user: I went to a hackathon with my friends Jonathan and Axel. 
+user: I went to a hackathon at the Factory in Berlin, organized by Factory Network and {Tech: Berlin}. 
+The sponsors were Mistral, Weaviate and LumaAI, as well as a few VCs (​Atlantic Labs, ​JVentures and ​Balderton). 
 
-The hackathon was focused on doing cool things with LLMs/AI, and we wanted to see if we could build something cool in a weekend, and to see what other people were getting up to. 
+I went with my friends, Jonathan Nye, pictured in the fourth picture with long gray hair, as well as Axel Nordfeldt, also in the last picture, although you can only see his arm. 
 
-We ended up building you, called JournalAIst, a bot that acts as your own personal ghostwriter, that will interview you you, and based on the interview and any images that you might provide will write a story for you. 
-assistant: **Picture 1:**
-- Who are the people in the picture?
-- What were you all doing together?
+We created a tool to help us write, and specifically to write blog posts, stories or journal entries. We called it JournalAIst, and it is the tool I am currently talking to. 
 
-**Picture 2:**
-- Who is the man speaking into the microphone?
-- What was the presentation about?
+We had credits for Mistral, Weaviate and LumaAI's APIs, and ended up using mostly Mistral's API, and a little bit of LumaAI's to create some cute videos. 
 
-**Picture 3:**
-- What is the diagram on the whiteboard about?
-- How did this diagram help with your project?
-
-**Picture 4:**
-- Who is the woman working on the laptop?
-- What was she working on?
-
-**General Day:**
-- What was the most exciting part of the hackathon for you?
-- How did you and your friends collaborate on your project?
-user: Picture 1: 
-The people in the first picture were some of the participants, having lunch at that moment. 
-
-Picture 2: 
-The person speaking into the microphone is one of the organizers, Emanuel. This was the introductory speech.
-
-Picture 3: 
-This was our initial diagram for building our chatbot. This helped us map out what work needed to be done. 
-
-Picture 4:
-That's not a woman, that's Jonathan. 
-He was coding up our app. 
-
- General: 
-Just seeing what we could build with these tools, and understanding what others were getting up to was pretty exciting. 
-We all wrote the code and messed around with the prompts. 
-
-
-assistant: **Picture 1:**
-- How did you feel seeing everyone gathered and socializing?
-- What kind of food and drinks were there?
-
-**Picture 2:**
-- What did Emanuel talk about in his introductory speech?
-- How did his speech make you feel about the hackathon?
-
-**Picture 3:**
-- What was the most challenging part of the diagram for your project?
-- How did the diagram help you and your friends collaborate?
-
-**Picture 4:**
-- What was Jonathan working on specifically on his laptop?
-- How did his coding contribute to the chatbot's functionality?
-
-**General:**
-- What was the most surprising thing you learned about AI at the hackathon?
-- How did you and your friends divide the tasks for building the chatbot?
-
-Ok, what else would you like to share about your day?
-user: Picture 1: 
-Way too much bread ;-) I was tired of bread by the end of the hackathon. But it was good to meet interesting people building interesting things. 
-
-Picture 2:
-Emanual introduced the concept, the sponsors and the timeline. 
- 
-Picture 3: 
-I can't exactly remember, but he was building our JournalAIst app in Streamlit with Mistral's LLMs. 
-We all contributed by gluing together the different models we used in different sections with Streamlit. 
-
-General: 
-it was surprising just how easy it is these days to get up and running with LLMs. There is so much tooling around that it is rather trivial to get going. 
-We split up some tasks, i.e. getting the model running/writing prompts, but eventually all of us did a little of everything.  
-
-assistant: **Picture 1:**
-- What kind of bread were you tired of by the end of the hackathon?
-- Who was the most interesting person you met during lunch?
-
-**Picture 2:**
-- Did Emanual mention any exciting sponsors or partners?
-- How did his introduction set the tone for the hackathon?
-
-**Picture 3:**
-- What was the most challenging part about integrating the models with Streamlit?
-- How did your team decide which models to use for different sections?
-
-**Picture 4:**
-- What do you think the woman was working on specifically on her laptop?
-- How did the environment with brick walls and large windows affect your productivity?
-
-**General:**
-- What was the most impressive project you saw at the hackathon besides your own?
-- How did the tools and resources available make your project easier or more challenging?
-
-Ok, what else would you like to share about your day?
-user: Picture 2: 
-Did Emanual mention any exciting sponsors or partners?
-
-Yeah Mistral, the LLM company, LumaAI, who have a video model called Dream Machine, and Weviate, who run Vector databases. 
-
-Picture 3: 
-Just understanding how streamlit apps worked was new to me. 
-The fact that the entire script get's rerun every time you take an action was a bit counter-intuitive at first. 
-
-> How did your team decide which models to use for different sections?
-We used what Mistral had on offer, so Pixtral was the obvious choice for image undestanding. 
-We used Mistral's large model for the actual chatting and story writing. 
-
-Picture 4: 
-For god's sake, that's Jonathan. He has long hair. 
-We got a really nice room, which was our little haven in the chaos of the hackathon. 
-
-
-assistant: **Picture 2:**
-- How did the sponsorships and partnerships influence your project or the hackathon overall?
-
-**Picture 3:**
-- What was the most challenging part about understanding how Streamlit apps worked?
-
-**Picture 4:**
-- What specific tasks was Jonathan handling while working on his laptop?
-
-**General:**
-- What was the atmosphere like in your "little haven" compared to the rest of the hackathon space?
-
-Ok, what else would you like to share about your day?
-user: Please stop asking me so many questions at a time. 
-assistant: Ok, let's talk about the first picture. Who were the people you were socializing with during lunch?
+We made it to the final round (so ended top 6), but didn't win any of the prizes. 
+assistant: What was the most exciting part of the hackathon for you?
+user: Just playing around with the tools we were provided and seeing what other people were putting together. 
+assistant: Ok! What can you tell me about the first picture?
+user: This was the lunch table as some of the participants stood around and took a break from hacking. 
+assistant: Ok, tell me more about the people in the first picture. Who were they and how did you know them?
+user: Not sure what their names are, but they were some of the other 100-ish people who attended the hackathon. 
+assistant: Ok, what was the most interesting thing you saw or experienced during the lunch break?
+user: Just conversations. I maybe ate too much bread and pizza. I was all carbed out afterwards. 
+assistant: Which picture would you like to talk about first? The one with the group of people around the table or the one with the man speaking in front of the screen?
+user: The man in front of the screen. 
+assistant: What was he talking about?
+user: His name is Emanuel Jöbstl and he was one of the organizers. This was the opening ceremony and he was introducing the rules and agenda for the hackathon. 
+assistant: What did he emphasize the most during his speech?
+user: Just how excited he was about the first hackathon that they were organizing in this space. 
+assistant: What did he say that made you feel excited?
+user: Next question please. 
+assistant: Ok! Let's start with the picture of the man speaking in front of the screen. What was he talking about?
+user: Next question please. Let's talk about another picture. 
+assistant: Which picture would you like to talk about next? The one with the whiteboard or the one with the woman working on a laptop?
+user: The whiteboard. For context, that's a man in front of the laptop. 
+assistant: Ok! Tell me more about the people in the whiteboard picture. Who were they and what were they doing?
+user: There are no people in the whiteboard picture, it's just a sketch we made while planning the build. It sketched out all the components we wanted to put together. 
+assistant: What was the most challenging part of creating JournalAIst?
+user: Getting the conversation loop, i.e. the interview to feel natural. 
+It's the most critical part of the build, and it often felt frustrating, which defeats the purpose of the build. We tried messing around with the prompts a bit, but I can't say I am 100% satisfied with it yet. 
+assistant: Ok, let's start with the picture of the group around the table. What was the atmosphere like during this gathering?
+user: People were pretty excited. It was a mix of experienced people and newbies, and people with different backgrounds. 
+assistant: Ok, what was the most interesting conversation you had during the lunch break?
+user: I spoke with someone (Johan Torssell) working for a small VC firm about his experiences moving from being a developer to working for a VC firm. 
+assistant: Great! Let's start with the picture of the group around the table. What was the most interesting conversation you had during the lunch break?
+user: Ask me about the last picture, the one of Jonathan in front of the laptop. 
+assistant: What was Jonathan working on in that picture?
+user: He was building JorunalAIst. I am not sure what exactly he was doing at that moment, but probably trying to find a satisfying prompt, or maybe fighting with Streamlit. 
+assistant: Ok! What was the atmosphere like during the hackathon?
+user: You have already asked that. next question. 
+assistant: Ok, let's talk about the woman working on a laptop in the fourth picture. What was she working on?
