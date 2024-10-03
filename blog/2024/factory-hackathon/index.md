@@ -80,7 +80,7 @@ The story is OK. Everything it stated was factual, and as the prompt this time w
 
 ## Conclusions
 
-Our project was one of the few that actually fully worked by the end of the hackathon, and our first showing really impressed the judges (they told me afterwards). On the strength of that we made it to the final six teams (out of about 25 that decided to enter). The pitch went fine, and we again did a live demo in the four minutes alloted to us. We didn't end up winning any prizes, but we were just happy to be in the finals. Maybe we needed a salesperson on our team and not just a bunch of engineers 😉. 
+Our project was one of the few that actually fully worked by the end of the hackathon, and our first showing really impressed the judges (they told me afterwards). On the strength of that we made it to the final six teams (out of about 25 that decided to enter). The pitch went fine, and we again did a live demo in the four minutes allotted to us. We didn't end up winning any prizes, but we were just happy to be in the finals. Maybe we needed a salesperson on our team and not just a bunch of engineers 😉. 
 
 I spoke to some of the judges afterwards, and one of the criticisms was that while initially impressive, they had worries about hallucinations: in our pitch we had highlighted that this is a way to hopefully tell an authentic and meaningful story, but with hallucinations, you might spend as much time fixing the story as you do talking to the model. This is extremely fair criticism and was also mirrored our worries. It did seem the longer you chatted to it the more factual the story ended up being (unsurprisingly), but at what point do you spend more time chatting then it would just have taken you to write it? 
 
