@@ -9,7 +9,7 @@ author: "Ferdinand Schenck"
 draft: false
 ---
 
-This past weekend I participated in a AI hackathon organized by [Factory Network](https://factory.network/) and [{Tech: Berlin}](https://www.techberlin.io/) with my friends Axel Nordfeldt and [Jonathan Nye](https://denyed.xyz/). The sponsors were [Mistral](https://mistral.ai/), [Weaviate](https://weaviate.io/) and [LumaAI](https://lumalabs.ai/), meaning we had a bunch of fun credits to play around with. 
+This past weekend I participated in a AI hackathon organized by [Factory Network](https://factory.network/) and [{Tech: Berlin}](https://www.techberlin.io/) with my friends Axel Nordfeldt and [Jonathan Nye](https://nyejon.com/). The sponsors were [Mistral](https://mistral.ai/), [Weaviate](https://weaviate.io/) and [LumaAI](https://lumalabs.ai/), meaning we had a bunch of fun credits to play around with. 
 
 I'm an ML engineer, but I haven't had that much exposure to the world brave new world of AI engineering that consists of calling LLM API's and prompt engineering, so I wanted to use the hackathon as a way to get a better understanding of which tools are out there are how people are using them. 
 
