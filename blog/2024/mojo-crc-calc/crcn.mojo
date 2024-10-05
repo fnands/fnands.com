@@ -1,7 +1,7 @@
 import benchmark
 from random import rand, seed
 from bit import bit_reverse, byte_swap
-
+from memory.unsafe import bitcast
 from testing import assert_equal
 
 fn fill_table_n_byte[n: Int]() -> List[UInt32]:
@@ -517,7 +517,7 @@ fn CRC32_table_8_byte2(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt3
     var length = bytes_count // size
     var extra = bytes_count % size
     
-    var data_pointer = DTypePointer(data.steal_data())
+    var data_pointer = UnsafePointer(data.steal_data())
     var data32_pointer = data_pointer.bitcast[DType.uint32]()
 
     for i in range(start=0, end=length * size, step=size):
@@ -542,11 +542,11 @@ fn CRC32_table_8_byte2(owned data: List[SIMD[DType.uint8, 1]], table: List[UInt3
     return crc32 ^ 0xFFFFFFFF
 
 
-fn fill_table_n_byte_simd[n: Int]() -> DTypePointer[DType.uint32]:
+fn fill_table_n_byte_simd[n: Int]() -> UnsafePointer[Scalar[DType.uint32]]:
 
     #alias size = 256*n
     #var table = SIMD[DType.uint32, size](0)
-    var table = DTypePointer[DType.uint32].alloc(256*n, alignment=64)
+    var table = UnsafePointer[Scalar[DType.uint32]].alloc(256*n)#, alignment=64)
 
     for i in range(256*n):
 
@@ -569,7 +569,7 @@ fn fill_table_n_byte_simd[n: Int]() -> DTypePointer[DType.uint32]:
 
 fn CRC32_table_n_byte_compact_simd[
     size: Int
-](borrowed data: List[SIMD[DType.uint8, 1]], borrowed table: DTypePointer[DType.uint32]) -> SIMD[DType.uint32, 1]:
+](borrowed data: List[SIMD[DType.uint8, 1]], borrowed table: UnsafePointer[Scalar[DType.uint32]]) -> SIMD[DType.uint32, 1]:
     var crc32: UInt32 = 0xFFFFFFFF
 
     alias step_size = 4
@@ -676,7 +676,7 @@ fn run_32_table_64_byte_compact[data: List[SIMD[DType.uint8, 1]], table: List[UI
 fn bench() raises:
     alias fill_size = 2**20
     alias g = UnsafePointer[SIMD[DType.uint8, 1]].alloc(fill_size)
-    rand[DType.uint8](ptr=g, size=fill_size)
+    rand[DType.uint8](g, fill_size)
 
     #alias rand_list = List[SIMD[DType.uint8, 1]](data=g, size=fill_size, capacity=fill_size)
     alias rand_list = List[SIMD[DType.uint8, 1]](unsafe_pointer=g, size=fill_size, capacity=fill_size)
