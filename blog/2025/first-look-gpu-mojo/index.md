@@ -186,7 +186,7 @@ grayscale_py_image.save("treed_brain_512_grayscale_simple.png")
 
 As you can see, we've now translated the image to grayscale!
 
-<img src="treed_brain_512_grayscale_simple.png?version=4" alt="Input image showing a tree-like structure in a brain scan" width="512" height="512">
+<img src="treed_brain_512_grayscale_simple.png" alt="Input image showing a tree-like structure in a brain scan" width="512" height="512">
 
 ### To Grayscale on the GPU
 
@@ -668,9 +668,9 @@ downsampled_4x_py_image.save("treed_brain_512_downsampled_4x.png")
 
 And as we can see, the images get progressively more blurry the more we downsample.
 
-<img src="treed_brain_512.png" alt="Input image showing a tree-like structure in a brain scan" width="512" height="512">
-<img src="treed_brain_512_downsampled_2x.png" alt="Downsampled image by a factor of 2" width="512" height="512">
-<img src="treed_brain_512_downsampled_4x.png" alt="Downsampled image by a factor of 4" width="512" height="512">
+<img src="treed_brain_512.png" alt="Input image showing a tree-like structure in a brain scan" width="256" height="256">
+<img src="treed_brain_512_downsampled_2x.png" alt="Downsampled image by a factor of 2" width="256" height="256">
+<img src="treed_brain_512_downsampled_4x.png" alt="Downsampled image by a factor of 4" width="256" height="256">
 
 ## Conclusion
 

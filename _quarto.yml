@@ -31,6 +31,7 @@ website:
 format:
   html:
     reference-location: document
+    code-fold: true
     theme: 
       dark: [solar, custom.scss]
       light: [flatly, custom-light.scss]
