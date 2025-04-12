@@ -17,6 +17,9 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: install other dependencies
+        run: pip install nbformat
       
       - name: Render website
         uses: quarto-dev/quarto-actions/render@v2
