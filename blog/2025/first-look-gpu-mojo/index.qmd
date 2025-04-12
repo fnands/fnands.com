@@ -44,9 +44,8 @@ I was halfway through writing this post before I realized that there was already
 To start, let's read in an image using [mimage](https://github.com/fnands/mimage), an image processing library I am working on.
 
 Let's take a look at our input image:
-
 <div style="text-align: center;">
-    <img src="treed_brain_512.png" alt="Input image showing a tree-like structure in a brain scan" width="512" height="512">
+  <img src="treed_brain_512.png" alt="Input image showing a tree-like structure in a brain scan" width="512" height="512">
 </div>
 
 ```mojo
@@ -75,7 +74,7 @@ So what we want to do here is to sum together the RGB values for each pixel, usi
 The first thing we need to do is convert the tensor to `float32` to prevent any overflow. I'm throwing away the alpha channel for simplicity:
 
 ```{mojo}
-#| eval: false
+#|eval: false
 #|code-fold: true
 #|code-summary: imports
 
@@ -138,7 +137,7 @@ print(grayscale_simple.spec())
 ```
 
 ```{mojo}
-#| eval: false
+#|eval: false
 #|code-fold: true
 #|code-summary: numpy conversion
 
@@ -345,9 +344,10 @@ Another example I wanted to try is downsampling an image. This is a bit more com
 First let's define some test images to make sure the function is doing what we expect. 
 
 This is a 16x16 image with 1 channel, where each 2x2 block has a unique value.
-
-```mojo
-#| code-fold: true
+```{mojo}
+#|eval: false
+#|code-fold: true
+#|code-summary: numpy conversion
 
 # Some helper functions to print out the "image"
 
