@@ -2,15 +2,19 @@
 layout: post
 title: A quick first look at GPU programming in Mojo 
 categories: [mojo]
-date: "2025-04-09"
+date: "2025-04-12"
 author: "Ferdinand Schenck"
-draft: true
+format: 
+  html:
+    toc: true
+    embed-resources: true
+    code-fold: true
 description: The long awaited (and often teased) feature is finally here. Or the one where I use Mojo to make my GPU go brrrrr.
 ---
 
 The day has finally arrived. Well actually, the day arrived in February, but who's counting. The Mojo language has finally publicly released the ability to do GPU programming - if you have a reasonably modern NVIDIA GPU. Luckily for me, I have an RTX 3090, and although it isn't [officially supported](https://docs.modular.com/max/faq#gpu-requirements), it is basically an A10, which is. Looking at some of the comments on the nightly releases, it does seem that AMD support is on the way as well. 
 
-The Modular team publicly released the ability to do GPU programming in Mojo in release 25.1 in February, with further support and documentation in release 25.2. Fun fact: release 25.2 also saw my first (tiny) contribution to the Mojo standard library.
+The Modular team publicly released the ability to do GPU programming in Mojo in release 25.1, with further support and documentation in release 25.2. Fun fact: release 25.2 also saw my first (tiny) contribution to the Mojo standard library.
 
 This is a really important step for Mojo, a language that bills itself as a language designed to solve a variety of AI development challenges, which in this day and age basically means programming an increasingly heterogeneous stack of hardware. Today this mostly means GPUs, but there is an explosion of new accelerators like the ones from Cerebras, Groq and SambaNova, not to mention the not-so-new TPU from Google. 
 
@@ -33,7 +37,7 @@ If you want to get started, there is a guide for [getting started with GPU progr
 
 I learn by doing, so I wanted to try to implement something with relatively simple using the GPU. 
 
-The example idea I chose is to transform an RGB image to grayscale, which is an embarrassingly parallelizable problem without a lot of complexity. 
+The example idea I chose is to transform an RGB image to grayscale, which is an embarrassingly parallel problem without a lot of complexity. 
 I was halfway through writing this post before I realized that there was already an [example](https://github.com/modular/max/blob/main/examples/gpu_functions/grayscale.mojo) of how to do grayscale conversion in the Mojo repo, but oh well. I basically just start with what's in the documentation, but I added another example that I did do myself. 
 
 
@@ -41,21 +45,14 @@ To start, let's read in an image using [mimage](https://github.com/fnands/mimage
 
 Let's take a look at our input image:
 
-
-<img src="treed_brain_512.png" alt="Input image showing a tree-like structure in a brain scan" width="512" height="512">
+<div style="text-align: center;">
+    <img src="treed_brain_512.png" alt="Input image showing a tree-like structure in a brain scan" width="512" height="512">
+</div>
 
 ```mojo
 import mimage
 
 original_image = mimage.imread("treed_brain_512.png")
-print(original_image.rank())
-```
-
-```text
-3
-```
-
-```mojo
 print(original_image.spec())
 ```
 
@@ -77,8 +74,10 @@ So what we want to do here is to sum together the RGB values for each pixel, usi
 
 The first thing we need to do is convert the tensor to `float32` to prevent any overflow. I'm throwing away the alpha channel for simplicity:
 
-```mojo
-#| code-fold: true
+```{mojo}
+#| eval: false
+#|code-fold: true
+#|code-summary: imports
 
 from max.driver import accelerator, cpu, Tensor, Accelerator
 from sys import exit, has_accelerator
@@ -138,8 +137,10 @@ print(grayscale_simple.spec())
 512x512xfloat32
 ```
 
-```mojo
-#| code-fold: true
+```{mojo}
+#| eval: false
+#|code-fold: true
+#|code-summary: numpy conversion
 
 from python import Python, PythonObject
 from memory import memcpy, UnsafePointer
@@ -185,8 +186,9 @@ grayscale_py_image.save("treed_brain_512_grayscale_simple.png")
 ```
 
 As you can see, we've now translated the image to grayscale!
-
-<img src="treed_brain_512_grayscale_simple.png" alt="Input image showing a tree-like structure in a brain scan" width="512" height="512">
+<div style="text-align: center;">
+  <img src="treed_brain_512_grayscale_simple.png" alt="Input image showing a tree-like structure in a brain scan" width="512" height="512">
+</div>
 
 ### To Grayscale on the GPU
 
@@ -205,7 +207,10 @@ print("Found the CPU device")
 gpu_device = accelerator()
 print("Found the GPU device")
 ```
-
+```text
+Found the CPU device
+Found the GPU device
+```
 Now that we know that Mojo can find our GPU, let's define the function that will do the actual conversion. This kernel reads a pixel from the input tensor, converts it to grayscale and writes the result to the output tensor. It is parallelized across the output tensor, which means that each thread is responsible for one pixel in the output tensor.
 
 As you can see, it takes in as parameters the layout specifications of the input and output tensors, the width and height of the image, and the input and output tensors themselves.
@@ -285,7 +290,7 @@ gpu_function = Accelerator.compile[
 ](gpu_device)
 ```
 
-And that's it! Let's call the GPU function. Here I will device the image up into blocks of 32x32 pixels, and then call the function. I have to admit, I have no clue what the best practices are for choosing the block size, so if you know a good rule of thumb, please let me know.
+And that's it! Let's call the GPU function. Here I will device the image up into blocks of 32x32 pixels, and then call the function. I have to admit, I have no clue what the best practices are for choosing the block size, so if you know a good rule of thumb, please let me know. I wonder if there is a way to tune these parameters at compile time? 
 
 ```mojo
 gpu_function(
@@ -323,6 +328,10 @@ if all_match:
     print("✅ Verification passed: CPU and GPU results match within numerical precision")
 else:
     print("❌ Verification failed: CPU and GPU results differ significantly")
+```
+
+```text
+✅ Verification passed: CPU and GPU results match within numerical precision
 ```
 
 and there we have it! We have successfully converted an image to grayscale using the GPU. 
@@ -460,7 +469,10 @@ print_image[8, 8](downsample_test_image_1_channel_2x)
  56   57   58   59   60   61   62   63  
 ```
 
-So it works! Now let's try to do the same on the GPU. 
+So it works! 
+This does make some assumptions about the input image, like that it is a multiple of the factor. But good enough for a blog post. 
+
+Now let's try to do the same on the GPU. 
 
 
 ### Downsampling on the GPU
@@ -648,6 +660,11 @@ else:
     print("❌ Verification failed: CPU and GPU 4x downsampling results differ significantly")
 ```
 
+```text
+✅ Verification passed: CPU and GPU 2x downsampling results match within numerical precision
+✅ Verification passed: CPU and GPU 4x downsampling results match within numerical precision
+```
+
 Great! We can save these and see what they look like:
 
 ```mojo
@@ -668,11 +685,23 @@ downsampled_4x_py_image.save("treed_brain_512_downsampled_4x.png")
 
 And as we can see, the images get progressively more blurry the more we downsample.
 
-<img src="treed_brain_512.png" alt="Input image showing a tree-like structure in a brain scan" width="256" height="256">
-<img src="treed_brain_512_downsampled_2x.png" alt="Downsampled image by a factor of 2" width="256" height="256">
-<img src="treed_brain_512_downsampled_4x.png" alt="Downsampled image by a factor of 4" width="256" height="256">
+<div style="text-align: center;">
+  <img src="treed_brain_512.png" alt="Input image showing a tree-like structure in a brain scan" width="256" height="256">
+  <img src="treed_brain_512_downsampled_2x.png" alt="Downsampled image by a factor of 2" width="256" height="256">
+  <img src="treed_brain_512_downsampled_4x.png" alt="Downsampled image by a factor of 4" width="256" height="256">
+</div>
 
 ## Conclusion
 
 
-This was my first quick look at GPU programming in Mojo.
+This was my first quick look at GPU programming in Mojo. I feel the hardest thing is conceptually understanding how to properly divide the work between threads, and how to assign the correct numbers of threads, blocks and warps (which I didn't even get into here). I guess the next move is to look up some guide on how to *efficiently* program GPUs, and to maybe try some more substantial examples. 
+
+
+The documentation on GPU programming in Mojo is still a bit sparse, and there aren't many examples out there in the wild to learn from, but I am sure that will change soon. The Moduar team did say they are releasing it unpolished so that they can gather some community feedback early. 
+
+For someone who uses GPUs a lot in my day job, I never really interact with the GPUs at a low level; it's always through PyTorch or JAX or some other layer of abstraction from Python. It's quite fun to have such low level access to the hardware in a language that doesn't feel that dissimilar from Python. 
+
+I think this is really where I am starting to see the vision behind Mojo more clearly. I think the shallow take is that Mojo is a faster Python, or basically some ungodly hybrid between Python and Rust, but the more I play with it the more I feel it's a language designed to make programming heterogenous hardware easier. I don't think it will be the only language like this we'll see, and I am curious to see if other languages based on MLIR will pop up soon, or if some existing languages will adapt. Maybe basing Julia 2.0 off MLIR instead of LLVM is a good next move for the language. 
+
+You only need to look at the schematic off Apple silicon chips these days to see which way the wind is blowing: a significant fraction of the chip is dedicated to GPU cores. I think the days where having a GPU attached to your computer was only for specialists is going out the window, and we might pretty soon be able to safely assume that every modern computer will have at least a decent amount of GPU cores available for general purpose tasks, and not just graphics. Still, I doubt most programmers will ever have to worry about actually directly programming GPUs, but I am interested to see how libraries take advantage of this fact. 
+
