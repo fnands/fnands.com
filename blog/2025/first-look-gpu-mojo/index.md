@@ -72,11 +72,9 @@ print(original_image[0], original_image[1], original_image[2], original_image[3]
 So what we want to do here is to sum together the RGB values for each pixel, using the weights `0.299`, `0.587` and `0.114` for red, green and blue respectively. If you want to know why we are using these weights, read this [article](https://e2eml.school/convert_rgb_to_grayscale). 
 
 The first thing we need to do is convert the tensor to `float32` to prevent any overflow. I'm throwing away the alpha channel for simplicity:
-
-```{mojo}
-#|eval: false
-#|code-fold: true
-#|code-summary: imports
+<details>
+<summary>Code: some imports</summary>
+```mojo
 
 from max.driver import accelerator, cpu, Tensor, Accelerator
 from sys import exit, has_accelerator
@@ -88,6 +86,7 @@ from gpu.id import block_dim, block_idx, thread_idx
 from gpu.host import DeviceContext, Dim
 from math import isclose
 ```
+</details>
 
 ```mojo
 
@@ -135,11 +134,9 @@ print(grayscale_simple.spec())
 ```text
 512x512xfloat32
 ```
-
-```{mojo}
-#|eval: false
-#|code-fold: true
-#|code-summary: numpy conversion
+<details>
+<summary>Code: numpy conversion</summary>
+```mojo
 
 from python import Python, PythonObject
 from memory import memcpy, UnsafePointer
@@ -170,6 +167,8 @@ fn to_numpy(tensor: MaxTensor[DType.float32]) -> PythonObject:
 
 
 ```
+
+</details>
 
 So hopefully that worked! Let's see if it's correct.
 
@@ -344,10 +343,9 @@ Another example I wanted to try is downsampling an image. This is a bit more com
 First let's define some test images to make sure the function is doing what we expect. 
 
 This is a 16x16 image with 1 channel, where each 2x2 block has a unique value.
-```{mojo}
-#|eval: false
-#|code-fold: true
-#|code-summary: numpy conversion
+<details>
+<summary>Code: tensor printing utils</summary>
+```mojo
 
 # Some helper functions to print out the "image"
 
@@ -376,6 +374,7 @@ def print_image[h: Int, w: Int](mut t: Tensor[DType.float32, 3]):
             print(v, " ", end="")
         print("")
 ```
+</details>
 
 ```mojo
     test_image_1_channel_2x = MaxTensor[DType.float32](
@@ -661,7 +660,7 @@ else:
 ```
 
 ```text
-✅ Verification passed: CPU and GPU 2x downsampling results match within numerical precision
+✅ Verification passed: CPU and GPU 2x downsampling results match within numerical precision</details>
 ✅ Verification passed: CPU and GPU 4x downsampling results match within numerical precision
 ```
 
