@@ -705,3 +705,4 @@ I think this is really where I am starting to see the vision behind Mojo more cl
 
 You only need to look at the schematic off Apple silicon chips these days to see which way the wind is blowing: a significant fraction of the chip is dedicated to GPU cores. I think the days where having a GPU attached to your computer was only for specialists is going out the window, and we might pretty soon be able to safely assume that every modern computer will have at least a decent amount of GPU cores available for general purpose tasks, and not just graphics. Still, I doubt most programmers will ever have to worry about actually directly programming GPUs, but I am interested to see how libraries take advantage of this fact. 
 
+
