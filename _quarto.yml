@@ -23,8 +23,6 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/fnands
-      #- text: "Bluesky {{< fa brands bluesky >}}"
-      #  url: "https://bsky.app/profile/ferdinandschenck.bsky.social"
       - icon: twitter
         href: https://twitter.com/f_nan_d
       - icon: rss
