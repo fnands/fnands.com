@@ -1,7 +1,7 @@
 ---
 title: "All posts"
 listing:
-  contents: [posts, blog/*/*/index.*]
+  contents: [posts, blog/*/*/index.{qmd,ipynb,md}]
   sort: "date desc"
   type: table
   fields: [date, title]
