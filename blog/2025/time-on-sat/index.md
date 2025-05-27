@@ -2,7 +2,7 @@
 layout: post
 title: What time is it on your satellite? 
 categories: [geospatial]
-date: "2025-05-26"
+date: "2025-08-26"
 author: "Ferdinand Schenck"
 description: Time-zones and space don't mix.
 draft: true
