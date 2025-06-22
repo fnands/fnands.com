@@ -48,8 +48,8 @@ The [DOFA paper](https://arxiv.org/abs/2403.15356) is worth a read, and putting 
 ## The engineering perspective
 
 One of the points made in the DOFA paper:   
-> The increasing number of specialized foundation models makes it difficult to select
-the most appropriate one for a specific downstream task.
+
+> The increasing number of specialized foundation models makes it difficult to select the most appropriate one for a specific downstream task.
 
 On the surface this sounds fair, but is it really that hard to go to [PapersWithCode](https://paperswithcode.com/), find the most similar dataset to your downstream task and select a model based on that? I can't really think of a scenario where you would not just spend a day or two searching through the literature for the most fitting model for your particular use case. The one case I can maybe think this might be the case is if you are a geospatial person with no ML skills and have a model that was set up for you as a black box behind some interface and squeezing every last bit of performance out is not critical to you. 
 
