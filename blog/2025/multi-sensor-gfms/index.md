@@ -80,7 +80,7 @@ The models were all trained for the same number of epochs, on the same relativel
 
 What I would need to see to be convinced is that when training a foundation model on multiple sensors that it would perform better on downstream tasks on each of the sensors than it would be if it was trained exclusively on the specific sensor to be used. I.e. one would need to show that the model would be more than the sum of it's parts. 
 
-The question is pretty much, given the same architecture, compute budget and dataset size, can a model learn something from one sensor that improves its performance on another? 
+The question is pretty much, given the same architecture, compute budget and dataset size, can a model learn something from one sensor that improves its performance on another? Or could it be that we need to throw everything into a big bucket and burn a lot of compute in the fashion of the current big LLMs that are so popular right now in order to really see generalization? 
 
 I'm definitely not ruling out the possibility that there might be some case (e.g. the sensor you are targeting doesn't have a lot of data available), but I have the feeling that the further away in GSD and spectral characteristics you go the less helpful pre-training becomes. 
 
