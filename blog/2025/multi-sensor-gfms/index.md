@@ -15,7 +15,7 @@ It's somewhat clear that GFMs are a hot topic in the Earth Observation (EO) spac
 
 A recent [post](https://www.linkedin.com/pulse/from-earth-pixels-geoembeddings-bruno-sanchez-andrade-nu%C3%B1o-h0sbf/) from Bruno Sanchez-Andrade Nuño (director of the Clay project) also made me think that there is a rough bifurcation in the GFM space appearing: one branch goes deep and the other goes wide. I think it is best if we understand which branch a model fits into and not judge one by the standards of the others. 
 
-I'm not going to directly respond to the other conversations going on: I'm just adding my two cents to the mix, and I want to be clear that the work I am doing mostly falls into the "go deep" branch. 
+I'm not going to directly respond to the other conversations going on: I'm just adding my two cents to the mix, and I want to be clear that the work I am doing definitely falls into the "go deep" branch, and my opinions are very much coloured by that fact.  
 
 ## Should GFMs go more general or specialize?
 
