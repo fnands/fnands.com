@@ -4,7 +4,7 @@ title: Can multi-sensor foundation models be more than the sum of their parts?
 categories: [geospatial, foundation models]
 date: "2025-06-22"
 author: "Ferdinand Schenck"
-description: An engineers perspective on multi-sensor foundation models.
+description: An engineer's perspective on multi-sensor foundation models.
 draft: false
 ---
 
@@ -70,7 +70,7 @@ I ran a few test using a variety of FM backbones, some trained on remote sensing
 
 One of the most interesting comparisons here is DINOv2: I used two variations, one using the original weights trained on natural images from Meta, and another with weights from [Keumgang Cha](https://github.com/chagmgang/dinov2-remote-sensing), which were trained on the [MillionAID](https://arxiv.org/pdf/2006.12485) and [SkyScript](https://arxiv.org/pdf/2312.12856) datasets. MillionAID is exclusively aerial imagery, while SkyScript contains mostly aerial imagery, plus some SkySat, Sentinel-2 and Landsat images. It's abundantly clear that the same architecture trained on remote sensing images greatly improve downstream performance compared to a the variant that was trained on natural images. This is expected, but it's impressive to see how large this gap is. 
 
-The best model we tested was trained mostly on aerial imagery, showing the domain gap isn't so much whether or not your sensor is in space or on a plane, but has more to do with similar resolutions.  
+The [best model](https://github.com/ViTAE-Transformer/MTP) we tested was trained mostly on aerial imagery, showing the domain gap isn't so much whether or not your sensor is in space or on a plane, but has more to do with similar resolutions.  
 
 The models were all trained for the same number of epochs, on the same relatively small dataset (around 1600 patches of 512 x 512 pixels) with the same optimizer etc. The encoders were not frozen, but trained with a lower learning rate than the decoders, as is common practice in most transfer learning scenarios. I will caveat this all with saying that I didn't do a massive amount of hyperparameter tuning for this test, but I think the differences are significant enough that it probably wouldn't make too much of a difference.
 
