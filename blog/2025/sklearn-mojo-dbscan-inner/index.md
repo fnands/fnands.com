@@ -10,7 +10,7 @@ format:
     embed-resources: true
     code-fold: true
 description: I kick the tires on Mojo's new Python interop by translating some of scikit-learn's Cython into Mojo
-draft: true
+#draft: true
 ---
 
 
@@ -23,7 +23,7 @@ Until recently, there has been no real way to call Mojo code from Python, but ab
 One idea that I had when I heard about Mojo was that Mojo might be a good replacement for Cython and apparently I was not the only one to have had this thought:
 
 
-![](HN_screenshot_Cython.png)
+![Convergent thinking on HN](HN_screenshot_Cython.png)
 
 
 The comments are from the [HackerNews discussion](https://news.ycombinator.com/item?id=44331316) on Vincent Warmerdam's blog post titled ["Python can run Mojo now"](https://koaning.io/posts/giving-mojo-a-spin/) which made it to the front page of HN a while ago. 
@@ -35,7 +35,8 @@ So where can I find a lot of Cython code?
 
 Scikit-learn implements a bunch of machine learning algorithms and related utilities, and makes heavy use of Cython. How hard would it be to translate some of the Cython code in scikit-learn to Mojo?
 
-I wanted a piece of code that was relatively simple, both just as I didn't want to jump into the deep end, but also because there are some restrictions on Mojo functions being called from Python, namely (from the known limitations section of the Mojo/Python interop):
+I wanted a piece of code that was relatively simple, both just as I didn't want to jump into the deep end, but also because there are some restrictions on Mojo functions being called from Python, namely (from the known limitations section of the Mojo/Python interop):  
+
 > **Functions taking more than 3 arguments.** Currently `PyTypeBuilder.add_function()` and related function bindings only support Mojo functions that take up to 3 `PythonObject` arguments: `fn(PythonObject, PythonObject, PythonObject)`.
 
 
@@ -150,7 +151,7 @@ I defined `stack` as a Mojo `List[Int]` to replace the C++ `vector[intp_t]` impl
 
 It was honestly quite a bit simpler than I thought it would be, and the fact that both Cython and Mojo's syntax is based on Python means a lot of the code "just works".
 
-As part of this experiment, my goal was to change the python code as little as possible, and all I needed to do in the `_dbscan.py` was add: 
+As part of this experiment, my goal was to change the Python code as little as possible, and all I needed to do in `_dbscan.py` was add: 
 
 
 ```python
@@ -178,7 +179,8 @@ tests/test_dbscan.py ..............................                             
 ======================================================== 30 passed, 10 warnings in 0.54s ========================================================
 ```
 
-The performance however is a bit lacking, presumably because Mojo is iterating over `PythonObjects` for which it can't properly optimize:
+The performance however is a bit lacking, presumably because Mojo is iterating over `PythonObjects` for which it can't properly optimize:  
+
 > Cython average time: 2.78e-05 seconds  
 Mojo average time: 0.0227 seconds
 
@@ -204,7 +206,7 @@ var is_core_ptr = is_core_py.ctypes.data.unsafe_get_as_pointer[DType.bool]()
 var is_core = Span(is_core_ptr, Int(is_core_py.shape[0]))
 ```
 
-Not the prettiest, but this creates the `Span` without copying over the data. 
+Not the prettiest, but this creates the `Span`s without copying over the data. 
 
 Testing the performance now, we get: 
 
