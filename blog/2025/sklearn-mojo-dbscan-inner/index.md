@@ -10,7 +10,7 @@ format:
     embed-resources: true
     code-fold: true
 description: I kick the tires on Mojo's new Python interop by translating some of scikit-learn's Cython into Mojo
-#draft: true
+draft: true
 ---
 
 
