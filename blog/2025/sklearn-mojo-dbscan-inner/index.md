@@ -10,17 +10,17 @@ format:
     embed-resources: true
     code-fold: true
 description: I kick the tires on Mojo's new Python interop by translating some of scikit-learn's Cython into Mojo
-draft: true
+draft: false
 ---
 
 
 Ever since I heard about Mojo I (and presumably most other people) thought it would be a good language to speed up functions to be called from Python. Everyone knows that vanilla Python can be slow, but one of the reasons that Python programs can be reasonably fast in practice is because Python often leans on libraries written in more performant languages, predominantly C/C++, but increasingly also Rust.
 
-Until recently, there has been no real way to call Mojo code from Python, but about a month ago (in Max [release 25.4](https://docs.modular.com/mojo/manual/python/mojo-from-python)) the ability to [call Mojo from Python](https://docs.modular.com/mojo/manual/python/mojo-from-python) was added as a beta feature. It's not fully yet, and it will likely still change a lot, but I wanted to give it a look just to get an idea for where things are heading. 
+Until recently, there has been no real way to call Mojo code from Python, but about a month ago (in Max [release 25.4](https://docs.modular.com/mojo/manual/python/mojo-from-python)) the ability to [call Mojo from Python](https://docs.modular.com/mojo/manual/python/mojo-from-python) was added as a beta feature. It's not fully cooked yet, and it will likely still change a lot, but I wanted to give it a look just to get an idea of where things are heading. 
 
 
 
-One idea that I had when I heard about Mojo was that Mojo might be a good replacement for Cython and apparently I was not the only one to have had this thought:
+One specific idea that I had when I heard about Mojo was that Mojo might be a good replacement for Cython and apparently I was not the only one to have had this thought:
 
 
 ![Convergent thinking on HN](HN_screenshot_Cython.png)
@@ -39,6 +39,7 @@ I wanted a piece of code that was relatively simple, both just as I didn't want 
 
 > **Functions taking more than 3 arguments.** Currently `PyTypeBuilder.add_function()` and related function bindings only support Mojo functions that take up to 3 `PythonObject` arguments: `fn(PythonObject, PythonObject, PythonObject)`.
 
+### A simple case: dbscan_inner
 
 An example I found that satisfies this criteria is the [inner loop of DBSCAN](https://github.com/scikit-learn/scikit-learn/blob/27e52567278abd23c643a8eded7cd8a078057ef6/sklearn/cluster/_dbscan_inner.pyx) that assigns points to clusters. It's relatively short and takes exactly three arguments. 
 
@@ -90,7 +91,9 @@ def dbscan_inner(const uint8_t[::1] is_core,
 
 It's not a complicated algorithm, and it labels core points and propagates that label to the neighbors of the core points.
 
-There is a bit of boilerplate we need to add to the `.mojo` file to make the function callable: 
+### Translating to Mojo
+
+For the most part I just copied over the Cython code verbatim. There is a bit of boilerplate we need to add to the `.mojo` file to make the function callable: 
 
 
 ```mojo
@@ -109,7 +112,7 @@ fn PyInit__dbscan_inner_mojo() -> PythonObject:
         return abort[PythonObject](String("error creating Python Mojo module:", e))
 ```
 
-but other than that, the translation was actually surprisingly straightforward: 
+but other than that, the translation was actually surprisingly straightforward, see if you can spot the differences in the Mojo and Cython versions: 
 
 
 ```mojo
@@ -187,6 +190,7 @@ Mojo average time: 0.0227 seconds
 
 That's around 800 times slower than Cython. We can however, make some minor tweaks to improve this. 
 
+### Improving performance
 
 Let's look at what is being passed to `dbscan_inner`:
 
@@ -237,10 +241,18 @@ In the future, I'd like to look into translating the slower parts of DBSCAN into
 
 ## Conclusions
 
-I chose this example not because it makes a lot of sense to translate it to Mojo, but just because it was easy to do so. Right now, the Python interop is still a little too bleeding edge to do anything serious with, but at the pace that the language is evolving I doubt that this will be true for long. 
+I chose this example not because it makes a lot of sense to translate it to Mojo, but just because it was easy to do so in a short amount of time. Right now, the Python interop is still a little too bleeding edge to do anything serious with, but at the pace that the language is evolving I doubt that this will be true for long. 
+
+It was however promising just how simple it was in this case, and most of the effort was in translating the PythonObjects into appropriate Mojo types to allow the compiler to reason about them. If I could request something from the Modular team it would be a "cheat-sheet" for best practices for translating common Python/numpy types into Mojo. 
+
+A more wholistic approach would be to also reconsider what is being passed to Mojo to make your life a bit easier when it comes to doing these translations. 
 
 
 
 ## Future plans
 
-Once the Python interop stabilizes a little I want to see if I can rewrite some more substantial part of scikit-learn in Mojo, and preferably some algorithm that's amenable to vectorization, possibly even on the GPU, so that I can really play into the strengths of Mojo.
+Once the Python interop stabilizes a little I want to see if I can rewrite some more substantial part of scikit-learn in Mojo, and preferably some algorithm that's amenable to vectorization, possibly even on the GPU, so that I can really play into the strengths of Mojo. If you have any suggestions for an algorithm that is in need of some speeding up, let me know. 
+
+I think moving a lot of scikit-learn's more computationally intensive code to Mojo could be an interesting project. There is a project called [Mojmelo](https://github.com/yetalit/mojmelo) which is effectively the Mojo ecosystem's answer to scikit-learn, however, almost no-one uses Mojo just yet. 
+
+On the other hand, scikit-learn was downloaded [100 Million times](https://pypistats.org/packages/scikit-learn) last month, so if you can speed up some of scikit-learn's algorithms you can have a positive impact for a lot of users. 
