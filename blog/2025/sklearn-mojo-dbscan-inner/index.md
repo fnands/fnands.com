@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Translating Cython to Mojo, a first attempt.
+title: Translating Cython to Mojo, a first attempt
 categories: [mojo]
 date: "2025-07-28"
 author: "Ferdinand Schenck"
