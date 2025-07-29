@@ -93,8 +93,7 @@ It's not a complicated algorithm, and it labels core points and propagates that 
 
 ### Translating to Mojo
 
-For the most part I just copied over the Cython code verbatim. There is a bit of boilerplate we need to add to the `.mojo` file to make the function callable: 
-
+For the most part I just copied over the Cython code verbatim. There is a bit of boilerplate we need to add to the `.mojo` file to make the function callable:
 
 ```mojo
 from python import PythonObject
@@ -112,8 +111,7 @@ fn PyInit__dbscan_inner_mojo() -> PythonObject:
         return abort[PythonObject](String("error creating Python Mojo module:", e))
 ```
 
-but other than that, the translation was actually surprisingly straightforward, see if you can spot the differences in the Mojo and Cython versions: 
-
+but other than that, the translation was actually surprisingly straightforward, see if you can spot the differences in the Mojo and Cython versions:
 
 ```mojo
 fn dbscan_inner(is_core: PythonObject,
@@ -154,8 +152,7 @@ I defined `stack` as a Mojo `List[Int]` to replace the C++ `vector[intp_t]` impl
 
 It was honestly quite a bit simpler than I thought it would be, and the fact that both Cython and Mojo's syntax is based on Python means a lot of the code "just works".
 
-As part of this experiment, my goal was to change the Python code as little as possible, and all I needed to do in `_dbscan.py` was add: 
-
+As part of this experiment, my goal was to change the Python code as little as possible, and all I needed to do in `_dbscan.py` was add:
 
 ```python
 import max.mojo.importer
@@ -167,9 +164,9 @@ from _dbscan_inner_mojo import dbscan_inner
 
 The `sys.path.insert(0, "")` is a bit clunky, but the Mojo devs have said this is a temporary workaround.
 
-I then ran pytest and all all the dbscan tests passed: 
+I then ran pytest and all all the dbscan tests passed:
 
-```bash
+```sh
 ============================================================== test session starts ==============================================================
 platform linux -- Python 3.12.9, pytest-8.4.1, pluggy-1.6.0
 rootdir: /fast/Workspace/scikit-learn
@@ -200,7 +197,7 @@ Let's look at what is being passed to `dbscan_inner`:
 
 * `labels` is a numpy array of integers, initialized to `-1`, signifying that the points are currently unlabeled. 
 
-We can transform `labels` and `is_core` into Mojo Spans (thanks to Owen Hilyard on the Modular Discord for the hints): 
+We can transform `labels` and `is_core` into Mojo Spans (thanks to Owen Hilyard on the Modular Discord for the hints):
 
 ```python
 var labels_ptr = labels_py.ctypes.data.unsafe_get_as_pointer[DType.index]()
@@ -211,6 +208,50 @@ var is_core = Span(is_core_ptr, Int(is_core_py.shape[0]))
 ```
 
 Not the prettiest, but this creates the `Span`s without copying over the data. 
+
+The final code looks like: 
+
+```mojo
+fn dbscan_inner(is_core_py: PythonObject,
+                 neighborhoods_py: PythonObject,
+                 labels_py: PythonObject) raises:
+    var label_num: Int= 0
+    var v: Int = 0
+
+    var labels_ptr = labels_py.ctypes.data.unsafe_get_as_pointer[DType.index]()
+    var labels = Span(labels_ptr, Int(labels_py.shape[0]))
+
+    var is_core_ptr = is_core_py.ctypes.data.unsafe_get_as_pointer[DType.bool]()
+    var is_core = Span[mut=False](is_core_ptr, Int(is_core_py.shape[0]))
+
+
+    var stack: List[Int] = []
+
+    for i in range(len(labels)):
+        if labels[i] != -1 or not is_core[i]:
+            continue
+
+        # Depth-first search starting from i, ending at the non-core points.
+        # This is very similar to the classic algorithm for computing connected
+        # components, the difference being that we label non-core points as
+        # part of a cluster (component), but don't expand their neighborhoods.
+        while True:
+            if labels[i] == -1:
+                labels[i] = label_num
+                if is_core[i]:
+                    var neighb = neighborhoods_py[i]
+
+                    for j in range(len(neighb)):
+                        v = Int(neighb[j])
+                        if labels[v] == -1:
+                            stack.append(v)
+
+            if len(stack) == 0:
+                break
+            i = stack.pop()
+
+        label_num += 1
+```
 
 Testing the performance now, we get: 
 
@@ -227,7 +268,7 @@ Even so, the overall performance of DBSCAN as a whole is unchanged, as this inne
 
 The performance is identical (lines overlap almost exactly), and it's the other parts of DBSCAN, like the neighborhood calculation, that take up the majority of the time:
 
-```bash
+```sh
 === Component Breakdown ===
 Data validation: 0.0003s (0.0%)
 NearestNeighbors fit: 0.0304s (2.1%)
@@ -255,4 +296,4 @@ Once the Python interop stabilizes a little I want to see if I can rewrite some 
 
 I think moving a lot of scikit-learn's more computationally intensive code to Mojo could be an interesting project. There is a project called [Mojmelo](https://github.com/yetalit/mojmelo) which is effectively the Mojo ecosystem's answer to scikit-learn, however, almost no-one uses Mojo just yet. 
 
-On the other hand, scikit-learn was downloaded [100 Million times](https://pypistats.org/packages/scikit-learn) last month, so if you can speed up some of scikit-learn's algorithms you can have a positive impact for a lot of users. 
+On the other hand, scikit-learn was downloaded [100 Million times](https://pypistats.org/packages/scikit-learn) last month, so if you can speed up some of scikit-learn's algorithms you can have a positive impact for a lot of users.
