@@ -8,15 +8,15 @@
 ## 2025
 
 
-#### Using foundation models for very high resolution, bi-temporal change detection.
+### Using foundation models for very high resolution, bi-temporal change detection.
 
 ESA-NASA International Workshop on AI Foundation Models for EO [video](https://youtu.be/8E9J6G7NWd8?si=gYbUnO5Bi3UQMAje&t=12713)  [slides](https://docs.google.com/presentation/d/e/2PACX-1vRrpeIiaMoj5tNwZbivY45xOZGWvRa48AcSNzGiP25YGz5StcvY16Cfm1GmQFUcTPBS-DJj2HIdsZJV/pub)
 
-PyData Berlin 2025 (adapted for a more general audience): [video](https://vimeo.com/1115528984/90eb7b91c0?fl=pl&fe=vl)  [slides](https://docs.google.com/presentation/d/e/2PACX-1vQpo3LPN9ewydhGzQ_FZESCBDTdhgLvPPk3cn1h7Y1EgduNly4qsjw6cxpL4mqYNj-oTrivjVHypsIV/pub)
+PyData Berlin 2025 (adapted for a more general audience) [video](https://vimeo.com/1115528984/90eb7b91c0?fl=pl&fe=vl)  [slides](https://docs.google.com/presentation/d/e/2PACX-1vQpo3LPN9ewydhGzQ_FZESCBDTdhgLvPPk3cn1h7Y1EgduNly4qsjw6cxpL4mqYNj-oTrivjVHypsIV/pub)
 
 ## 2024
 
-#### The taller the tree, the harder the fall - Determining tree height from space using Deep Learning and very high resolution satellite imagery. 
+### The taller the tree, the harder the fall - Determining tree height from space using Deep Learning and very high resolution satellite imagery. 
 
 PyConDE Berlin 2024 [video](https://www.youtube.com/watch?v=7bWGLmUbrYI)  [slides](https://docs.google.com/presentation/d/e/2PACX-1vTSu6KcRNr-HkQ12bBQZjUFcimrSR0jV2sU2VYVCEwjqCVnLGSkKurLQ5v8QUeKNt4IaZ-UblQV4dV-/pub)
 
