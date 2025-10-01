@@ -9,7 +9,7 @@ about:
       href: https://twitter.com/f_nan_d
     - icon: linkedin
       text: LinkedIn
-      href: https://www.linkedin.com/in/ferdinand-schenck-3027677a/
+      href: https://www.linkedin.com/in/ferdinand-schenck/
     - icon: github
       text: Github
       href: https://github.com/fnands
