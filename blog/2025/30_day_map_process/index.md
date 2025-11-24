@@ -18,7 +18,7 @@ If you work in the Geospatial Machine Learning (or AI[^1]) domain, you'll know t
 [^1]: It's only AI if it's from the AI region of France, otherwise it's just sparking Machine Learning. 
 
 
-![Meme from Zoolander with Mugatu saying 'So Hot Right Now'](sohot.jpeg){fig-align="center" width="620" height="497"}
+![Meme from Zoolander with Mugatu saying 'So Hot Right Now'](sohot.jpg){fig-align="center" width="620" height="497"}
 
 But what exactly **are** embeddings? 
 
