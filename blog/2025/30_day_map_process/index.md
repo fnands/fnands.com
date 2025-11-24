@@ -9,6 +9,7 @@ format:
     toc: true
     embed-resources: true
     code-fold: true
+lightbox: true
 description: Done as part of the 30DayMapChallenge 2025.
 ---
 
@@ -76,11 +77,11 @@ I studied in Adlershof (it hosts the science campus of HU-Berlin), and during th
 
 
 ::: {layout="[1,1,1]"}
-![Adlershof Changes](AdlershofChange.png)
+![Adlershof Changes](AdlershofChange.png){group="adlershof"}
 
-![Sentinel-2 Before](AdlershofBefore.png)
+![Sentinel-2 Before](AdlershofBefore.png){group="adlershof"}
 
-![Sentinel-2 After](AdlershofAfter.png)
+![Sentinel-2 After](AdlershofAfter.png){group="adlershof"}
 :::
 
 According to the [Economic Affairs, Energy and Public Enterprises for Berlin](https://www.berlin.de/sen/web/en/economics-and-technology/centres-of-technology-zukunftsorte-smart-city/zukunftsorte/adlershof/artikel.597193.en.php), over half a billion Euros have been invested by the Berlin government to improve Adlershof in the last few years. 
@@ -90,11 +91,11 @@ According to the [Economic Affairs, Energy and Public Enterprises for Berlin](ht
 Another point that stood out was the Tegel Airport, which was shut down in 2021:
 
 ::: {layout="[1,1,1]"}
-![Tegel Changes](TegelChange.png)
+![Tegel Changes](TegelChange.png){group="tegel"}
 
-![Sentinel-2 Before](TegelBefore.png)
+![Sentinel-2 Before](TegelBefore.png){group="tegel"}
 
-![Sentinel-2 After](TegelAfter.png)
+![Sentinel-2 After](TegelAfter.png){group="tegel"}
 :::
 
 The temporary buildings around the terminal are part of a [refugee camp](https://www.berlin.de/en/news/9683254-5559700-tegel-airport-to-remain-refugee-accommod.en.html) set up in 2022 to house people mostly fleeing the war in Ukraine. 
@@ -112,14 +113,14 @@ So pretty much the norm for doing construction in the heavily bombed Berlin: you
 Another one that stood out to me in was a blob in the Grunewald forest in the western side of Berlin:
 
 ::: {layout="[1,1,1]"}
-![Grunewald Changes](GrunewaldChange.png)
+![Grunewald Changes](GrunewaldChange.png){group="grunewald"}
 
-![Sentinel-2 Before](GrunewaldBefore.png)
+![Sentinel-2 Before](GrunewaldBefore.png){group="grunewald"}
 
-![Sentinel-2 After](GrunewaldAfter.png)
+![Sentinel-2 After](GrunewaldAfter.png){group="grunewald"}
 :::
 
-It's from a large fire that occurred in 2022 when a [bomb storage site](https://www.bbc.com/news/world-europe-62426412) caught fire and sparked a fire in the forest. This one impressed me as it is not that apparent on the imagery.
+It's from a large fire that occurred in 2022 when a [bomb storage site](https://www.bbc.com/news/world-europe-62426412) caught fire and sparked a fire in the forest. This one impressed me as it is not that apparent on the imagery, at least not in the RGB bands. 
 
 
 ### Method
@@ -404,11 +405,11 @@ Well:
 
 
 ::: {layout="[1,1,1]"}
-![Treptow Changes](TreptowerChange.png)
+![Treptow Changes](TreptowerChange.png){group="treptow"}
 
-![Sentinel-2 Before](TreptowerBefore.png)
+![Sentinel-2 Before](TreptowerBefore.png){group="treptow"}
 
-![Sentinel-2 After](TreptowerAfter.png)
+![Sentinel-2 After](TreptowerAfter.png){group="treptow"}
 :::
 
 Looking at the 2017 Sentinel-2 image, you can see a cloud shadow over the Treptow region of Berlin. Optically, this is quite a significant change, but semantically, it is meaningless. You can probably get around this by smarter filtering, and finding some way to exclude cloud shadows, but this is a pretty hard. 
