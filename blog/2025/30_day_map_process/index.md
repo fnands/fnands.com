@@ -119,7 +119,7 @@ Another one that stood out to me in was a blob in the Grunewald forest in the we
 ![Sentinel-2 After](GrunewaldAfter.png)
 :::
 
-It's from a large fire that occurred in 2022 when a [bomb storage site](https://www.bbc.com/news/world-europe-62426412) caught fire and sparked a fire in the forest.  
+It's from a large fire that occurred in 2022 when a [bomb storage site](https://www.bbc.com/news/world-europe-62426412) caught fire and sparked a fire in the forest. This one impressed me as it is not that apparent on the imagery.
 
 
 ### Method
@@ -420,7 +420,7 @@ Geospatial embeddings are still relatively new, and people are still figuring ou
 
 What is clear to me is that they offer a great way to do large scale analyses very quickly. I scaled up the example above to a 800 km$^2$ area of the Amazon, and the runtime was still only 10 or so seconds on GEE. 
 
-You could probably do a better job for your specific task by training a bespoke model, but that will likely take days of work, not to mention ML know-how, and a lot of compute. With embeddings, anyone can perform an analysis in minutes or hours, and the fact that this can easily be applied at a global scale is really impressive. I think we will see a lot more use cases built on geospatial embeddings in the coming years. I am sure that 
+You could probably do a better job for your specific task by training a bespoke model, but that will likely take days of work, not to mention ML know-how, and a lot of compute. With embeddings, anyone can perform an analysis in minutes or hours, and the fact that this can easily be applied at a global scale is really impressive. I think we will see a lot more use cases built on geospatial embeddings in the coming years. For prototyping, there really is no better tool, and I am excited to see what unexpected use cases pop up from these datasets. 
 
 
 
