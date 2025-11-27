@@ -15,7 +15,7 @@ description: Done as part of the 30DayMapChallenge 2025.
 
 If you work in the Geospatial Machine Learning (or AI[^1]) domain, you'll know that embeddings are all the rage at the moment. I used the meme below in an internal presentation a few months ago, but I think it is relevant here: 
 
-[^1]: It's only AI if it's from the AI region of France, otherwise it's just sparking Machine Learning. 
+[^1]: It's only AI if it's from the AI region of France, otherwise it's just sparkling Machine Learning. 
 
 
 ![Meme from Zoolander with Mugatu saying 'So Hot Right Now'](sohot.jpg){fig-align="center" width="620" height="497"}
