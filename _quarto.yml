@@ -11,8 +11,8 @@ website:
     # 🏠 📮 👨🏽‍💻 🍎 🎤 📚
     - text: "Blog"
       href: index.qmd
-    - text: Notes
-      file: notes/index.qmd
+    #- text: Notes
+    #  file: notes/index.qmd
     - text: Talks
       file: talks/index.qmd
     right:
