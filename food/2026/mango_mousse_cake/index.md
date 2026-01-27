@@ -73,6 +73,7 @@ I might try fresh mango slices in the future.
 
 ## Things to try
 
+* Use a more robust sponge cake so it doesn't collapse as much
 * Add a second layer of sponge inside the cake
 * Add a layer of jelly inside the cake
 * Infuse the sponge with mango juice/essence
