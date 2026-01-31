@@ -118,4 +118,4 @@ The Amarula, unsurprisingly was delicious. But what to pair it with? Can actuall
 
 The Earl Grey was good, but a little bit overpowering. I found [this recipe](https://www.sogoodmagazine.com/pastry-recipes/raspberry-tea-earl-grey-by-elena-krasnova/) by someone who seems to know what they are doing and she was using less than half the amount of tea I was, so I think one tea bag would have been plenty. Maybe following the recipe above Earl Grey and raspberry? Or maybe orange? 
 
-The Rooibos was just great. It was just the right strength. Rooibos goes well with vanilla, and also honey. It's a bit of a subtle flavour, so I might be a bit afraid by overwhelming it with citrus or tropical fruit. Rooibos mousse, vanilla sponge and honey jelly? 
+The Rooibos was just great. It was just the right strength. Rooibos goes well with vanilla, and also honey. It's a bit of a subtle flavour, so I might be a bit afraid by overwhelming it with citrus or tropical fruit. Rooibos mousse, vanilla sponge and honey jelly? But maybe you need that contrast. 
