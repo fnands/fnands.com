@@ -18,4 +18,4 @@ about:
 
 This is my personal website. I write about whatever interests me.  
 
-I'm a machine learning engineer with a background in physics, currently working at LiveEO. 
+I'm a machine learning engineer with a background in physics, currently working at ICEYE. Formerly at LiveEO. 
